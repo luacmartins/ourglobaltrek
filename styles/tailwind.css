@@ -1,0 +1,24 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+   .text-gradient {
+     background-clip: text;
+     -webkit-background-clip: text;
+     color: transparent;
+     -webkit-text-fill-color: transparent;
+   }
+
+   .bg-blur-3 {
+      backdrop-filter: blur(3px);
+   }
+
+   .bg-blur-5 {
+      backdrop-filter: blur(5px);
+   }
+
+   .bg-blur-8 {
+      backdrop-filter: blur(8px);
+   }
+ }

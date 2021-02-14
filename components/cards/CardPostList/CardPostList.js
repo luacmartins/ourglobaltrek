@@ -2,10 +2,9 @@ import Reveal from "react-awesome-reveal"
 import { keyframes } from '@emotion/react'
 import useSize from '../../hooks/useSize'
 import CardPost from '../CardPost'
-import Spinner from '../../common/Spinner'
 import Error from '../../common/Error'
 
-export default function CardPostList({ data, isLoading, error, home }) {
+export default function CardPostList({ data, error, home }) {
    const { width, height } = useSize()
    const delay = (i) => {
       // Math.ceil((height - 174) / 120) Returns the number of cards on the screen

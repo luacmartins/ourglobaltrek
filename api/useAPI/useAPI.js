@@ -49,19 +49,18 @@ export async function getCategories(parent) {
    return data?.categories?.nodes
 }
 
-export function getPostsWithFilters(variables, initialContent) {
-   // Set initial cached data only for default query, then ommit it to fetch the data and cache it.
-   // If initial data is not set to undefined, swr will use it as initial data for each new set of keys.
-   const initialQuery = postByCategories({ first: 10, before: "", query: [] })
-   const query = postByCategories(variables)
-   const initialData = initialQuery !== query ? undefined : [{ posts: { ...initialContent } }]
+export function getPostsWithFilters(query, initialContent) {
+   // Set initial cached data only for default query, ommit it for other queries to fetch data and cache it.
+   // If initial data is not set to undefined, swr will use it as initial data for each new set of requests.
+   const initialData = (query.length === 0) ? [{ posts: { ...initialContent } }] : undefined
 
    const getKey = (pageIndex, previousPageData) => {
       // first page, we don't have `previousPageData`
-      if (pageIndex === 0) return query
-      const params = { first: 10, before: previousPageData?.posts?.pageInfo?.endCursor, query: variables.query }
-      // add the cursor to the API endpoint
-      return postByCategories(params)
+      if (pageIndex === 0) return postByCategories({ first: 12, before: "", query })
+
+      // get next page cursor from previous page data and return new variables
+      const before = previousPageData?.posts?.pageInfo?.endCursor
+      return postByCategories({ first: 12, before, query })
    }
 
    const { data, error, size, setSize } = useSWRInfinite(getKey, swrFetcher, { initialData })
@@ -75,17 +74,38 @@ export function getPostsWithFilters(variables, initialContent) {
    }
 }
 
-export function getPhotosWithFilters(variables, initialContent) {
-   const initialQuery = photoByCategories({ first: 10, before: "", query: [] })
-   const query = photoByCategories(variables)
-   const initialData = initialQuery !== query ? undefined : { photos: { ...initialContent } }
+// export function getPhotosWithFilters(variables, initialContent) {
+//    const initialQuery = photoByCategories({ first: 10, before: "", query: [] })
+//    const query = photoByCategories(variables)
+//    const initialData = initialQuery !== query ? undefined : { photos: { ...initialContent } }
 
-   const { data, error } = useSWR(query, swrFetcher, { initialData })
+//    const { data, error } = useSWR(query, swrFetcher, { initialData })
+
+//    return {
+//       data: data?.photos?.nodes,
+//       pageInfo: data?.photos?.pageInfo,
+//       isLoading: !data?.photos && !error,
+//       error
+//    }
+// }
+
+export function getPhotosWithFilters(query, initialContent) {
+   const initialData = (query.length === 0) ? [{ photos: { ...initialContent } }] : undefined
+
+   const getKey = (pageIndex, previousPageData) => {
+      if (pageIndex === 0) return photoByCategories({ first: 10, before: "", query })
+
+      const before = previousPageData?.photos?.pageInfo?.endCursor
+      return photoByCategories({ first: 10, before, query })
+   }
+
+   const { data, error, size, setSize } = useSWRInfinite(getKey, swrFetcher, { initialData })
 
    return {
-      data: data?.photos?.nodes,
-      pageInfo: data?.photos?.pageInfo,
-      isLoading: !data?.photos && !error,
-      error
+      data: data && data.length > 0 ? [].concat(...data.map(item => item.photos.nodes)) : data?.photos?.nodes,
+      isLoading: !data && !error || (size > 0 && data && typeof data[size - 1] === "undefined"),
+      isReachingEnd: data && !data[data?.length - 1]?.photos?.pageInfo?.hasNextPage,
+      loadMore: () => setSize(size + 1),
+      error,
    }
 }

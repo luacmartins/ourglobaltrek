@@ -8,9 +8,7 @@ import Pagination from '../../components/common/Pagination'
 
 export default function TravelBlog({ links, categories, initialData }) {
    const [query, setQuery] = useState([])
-   const variables = { first: 10, before: "", query }
-
-   const { data, isLoading, error, isReachingEnd, loadMore } = getPostsWithFilters(variables, initialData)
+   const { data, isLoading, error, isReachingEnd, loadMore } = getPostsWithFilters(query, initialData)
 
    return (
       <>
@@ -22,7 +20,7 @@ export default function TravelBlog({ links, categories, initialData }) {
          <Layout links={links}>
             <div className="mt-24 md:mt-32 lg:mt-40 mx-4 md:mx-8 xl:mx-20">
                {!error && <Filters categories={categories} query={query} setQuery={setQuery} />}
-               <CardPostList data={data} />
+               <CardPostList data={data} error={error} />
                <Pagination isLoading={isLoading} isReachingEnd={isReachingEnd} loadMore={loadMore} />
             </div>
          </Layout>
@@ -32,7 +30,7 @@ export default function TravelBlog({ links, categories, initialData }) {
 
 export async function getStaticProps() {
    const links = await getMenu()
-   const data = await getAllPosts(10)
+   const data = await getAllPosts(12)
    const listCategories = await getCategories(1984)
    const mainCategories = await getCategories(2096)
 

@@ -6,7 +6,7 @@ export default `query posts($first: Int!) {
           name
         }
       }
-      categories(where: {childless: true}) {
+      categories(where: {childless: true, excludeTree: "2096"}) {
         nodes {
           name
         }

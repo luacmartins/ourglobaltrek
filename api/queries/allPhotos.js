@@ -1,7 +1,7 @@
 export default `query photos($first: Int!) {
   photos(first: $first) {
     nodes {
-      categories(where: {exclude: ["25", "1981", "1982"]}) {
+      categories(where: {parent: 1984}) {
         nodes {
           name
         }

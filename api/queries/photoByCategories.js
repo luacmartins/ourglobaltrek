@@ -15,7 +15,7 @@ export default function photoByCategories({ first, before, query }) {
           srcSet
         }
       }
-      categories(where: {childless: true, exclude: ["25", "1981", "1982"], excludeTree: "2096"}) {
+      categories(where: {parent: 1984}) {
         nodes {
           name
         }

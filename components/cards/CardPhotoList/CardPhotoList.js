@@ -5,16 +5,16 @@ import CardPhoto from '../CardPhoto'
 import Spinner from '../../common/Spinner'
 import Error from '../../common/Error'
 
-export default function CardPhotoList({ data, isLoading, error }) {
+export default function CardPhotoList({ data, error }) {
    const { className, height } = useTiledGrid()
-   if (isLoading) return <Spinner />
+
    if (error) return <Error />
-   if (!data.length) return <div>Rain check. No stories to share.</div>
+   if (data && !data.length) return <div>Rain check. No stories to share.</div>
 
    return (
       <>
          <div className="grid grid-cols-1 md:grid-cols-3 mb-12 gap-y-6 md:gap-4 justify-center mt-10">
-            {data.map((post, i) => (
+            {data && data.map((post, i) => (
                <Reveal key={post.slug} keyframes={customAnimation} triggerOnce className={className(i)} delay={i % 4 * 150}>
                   <CardPhoto data={post} height={height(i)} />
                </Reveal>

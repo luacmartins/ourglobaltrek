@@ -8,7 +8,7 @@ import CardPhotoList from '../components/cards/CardPhotoList'
 import Section from '../components/common/Section'
 import Layout from '../components/layouts/Layout'
 
-export default function Home({ links, posts, page, photos }) {
+export default function Home({ links, page, posts, photos }) {
    const { isMobile } = useSize()
 
    return (
@@ -47,7 +47,7 @@ export async function getStaticProps() {
          links,
          page,
          posts: posts.nodes,
-         photos
+         photos: photos.nodes
       }
    }
 }

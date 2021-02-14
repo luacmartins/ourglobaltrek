@@ -15,14 +15,13 @@ export default function CardPostList({ data, isLoading, error, home }) {
       return i % 8 * 150
    }
 
-   if (isLoading) return <Spinner />
    if (error) return <Error />
-   if (!data.length) return <div>Rain check. No stories to share.</div>
+   if (data && !data.length) return <div>Rain check. No stories to share.</div>
 
    return (
       <>
          <div className={`grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 featured justify-center mt-8 mb-8 ` + `${home ? 'gap-6 md:gap-8' : 'gap-6 md:gap-x-8 md:gap-y-16'}`}>
-            {data.map((post, i) => (
+            {data && data.map((post, i) => (
                <Reveal key={post.slug} keyframes={customAnimation} triggerOnce className={home && !i ? 'md:col-span-3 lg:col-span-4' : ''} delay={delay(i)}>
                   <CardPost data={post} featured={home && !i} />
                </Reveal>

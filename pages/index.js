@@ -46,7 +46,7 @@ export async function getStaticProps() {
       props: {
          links,
          page,
-         posts,
+         posts: posts.nodes,
          photos
       }
    }

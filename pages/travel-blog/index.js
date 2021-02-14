@@ -8,10 +8,9 @@ import Pagination from '../../components/common/Pagination'
 
 export default function TravelBlog({ links, categories, initialData }) {
    const [query, setQuery] = useState([])
-   const [before, setBefore] = useState("")
+   const variables = { first: 10, before: "", query }
 
-   const variables = { first: 10, before, query }
-   const { data, pageInfo, isLoading, error } = getPostsWithFilters(variables, initialData)
+   const { data, isLoading, error, isReachingEnd, loadMore } = getPostsWithFilters(variables, initialData)
 
    return (
       <>
@@ -23,8 +22,8 @@ export default function TravelBlog({ links, categories, initialData }) {
          <Layout links={links}>
             <div className="mt-24 md:mt-32 lg:mt-40 mx-4 md:mx-8 xl:mx-20">
                {!error && <Filters categories={categories} query={query} setQuery={setQuery} />}
-               <CardPostList isLoading={isLoading} error={error} data={data} />
-               <Pagination pageInfo={pageInfo} isLoading={isLoading} loadMore={setBefore} />
+               <CardPostList data={data} />
+               <Pagination isLoading={isLoading} isReachingEnd={isReachingEnd} loadMore={loadMore} />
             </div>
          </Layout>
       </>

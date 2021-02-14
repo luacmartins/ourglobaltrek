@@ -1,5 +1,5 @@
 import fetcher, { swrFetcher } from './fetcher'
-import useSWR from 'swr'
+import useSWR, { useSWRInfinite } from 'swr'
 import { menu, page, allPosts, allPhotos, allPostPaths, allPhotoPaths, postBySlug, postByCategories, photoByCategories, photoBySlug, allCategories } from '../queries'
 
 const uri = process.env.NEXT_PUBLIC_API_URI
@@ -54,15 +54,24 @@ export function getPostsWithFilters(variables, initialContent) {
    // If initial data is not set to undefined, swr will use it as initial data for each new set of keys.
    const initialQuery = postByCategories({ first: 10, before: "", query: [] })
    const query = postByCategories(variables)
-   const initialData = initialQuery !== query ? undefined : { posts: { ...initialContent } }
+   const initialData = initialQuery !== query ? undefined : [{ posts: { ...initialContent } }]
 
-   const { data, error } = useSWR(query, swrFetcher, { initialData })
+   const getKey = (pageIndex, previousPageData) => {
+      // first page, we don't have `previousPageData`
+      if (pageIndex === 0) return query
+      const params = { first: 10, before: previousPageData?.posts?.pageInfo?.endCursor, query: variables.query }
+      // add the cursor to the API endpoint
+      return postByCategories(params)
+   }
+
+   const { data, error, size, setSize } = useSWRInfinite(getKey, swrFetcher, { initialData })
 
    return {
-      data: data?.posts?.nodes,
-      pageInfo: data?.posts?.pageInfo,
-      isLoading: !data?.posts && !error,
-      error
+      data: data && data.length > 0 ? [].concat(...data.map(item => item.posts.nodes)) : data?.posts?.nodes,
+      isLoading: !data && !error || (size > 0 && data && typeof data[size - 1] === "undefined"),
+      isReachingEnd: data && !data[data?.length - 1]?.posts?.pageInfo?.hasNextPage,
+      loadMore: () => setSize(size + 1),
+      error,
    }
 }
 

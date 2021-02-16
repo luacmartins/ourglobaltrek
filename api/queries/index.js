@@ -10,3 +10,4 @@ export { default as photoByCategories } from './photoByCategories';
 export { default as photoBySlug } from './photoBySlug';
 export { default as postByCategories } from './postByCategories';
 export { default as postBySlug } from './postBySlug';
+export { default as search } from './search';

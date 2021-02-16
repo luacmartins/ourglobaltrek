@@ -1,8 +1,6 @@
 import fetcher, { swrFetcher } from './fetcher'
 import { useSWRInfinite } from 'swr'
-import { menu, page, allPosts, allPhotos, allPostPaths, allPhotoPaths, postBySlug, postByCategories, photoByCategories, photoBySlug, allCategories, allPhotoCategories } from '../queries'
-
-const uri = process.env.NEXT_PUBLIC_API_URI
+import { menu, page, allPosts, allPhotos, allPostPaths, allPhotoPaths, postBySlug, postByCategories, photoByCategories, photoBySlug, allCategories, allPhotoCategories, search } from '../queries'
 
 export async function getMenu() {
    const data = await fetcher(menu)
@@ -114,6 +112,28 @@ export function getPhotosWithFilters(query, initialContent) {
       data: data && data.length > 0 ? [].concat(...data.map(item => item.photos.nodes)) : data?.photos?.nodes,
       isLoading: !data && !error || (size > 0 && data && typeof data[size - 1] === "undefined"),
       isReachingEnd: data && !data[data?.length - 1]?.photos?.pageInfo?.hasNextPage,
+      loadMore: () => setSize(size + 1),
+      error,
+   }
+}
+
+export function getSearch(query) {
+   const getKey = (pageIndex, previousPageData) => {
+      // first page, we don't have `previousPageData`
+      console.log(search({ first: 12, before: "", query }))
+      if (pageIndex === 0) return search({ first: 12, before: "", query })
+
+      // get next page cursor from previous page data and return new variables
+      const before = previousPageData?.posts?.pageInfo?.endCursor
+      return search({ first: 12, before, query })
+   }
+
+   const { data, error, size, setSize } = useSWRInfinite(getKey, swrFetcher)
+
+   return {
+      data: data && data.length > 0 ? [].concat(...data.map(item => item.posts.nodes)) : data?.posts?.nodes,
+      isLoading: !data && !error || (size > 0 && data && typeof data[size - 1] === "undefined"),
+      isReachingEnd: data && !data[data?.length - 1]?.posts?.pageInfo?.hasNextPage,
       loadMore: () => setSize(size + 1),
       error,
    }

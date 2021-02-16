@@ -2,14 +2,94 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer utilities {
-   .text-gradient {
-     background-clip: text;
-     -webkit-background-clip: text;
-     color: transparent;
-     -webkit-text-fill-color: transparent;
+@layer components {
+   .wordpress h2{ 
+      @apply font-semibold text-gray-900 text-2xl mb-4 mt-6 md:mt-8 md:text-3xl
+
+     }
+
+   .wordpress h3 {
+      @apply font-semibold text-gray-900 text-xl mb-4 mt-6
    }
 
+   .wordpress p {
+      @apply mb-6 inline
+   }
+
+   .wordpress ul {
+      @apply mb-6 mx-2 mt-4
+   }
+
+   .wordpress strong {
+      @apply font-medium
+   }
+
+   .wordpress li {
+      @apply list-inside list-disc mb-3
+   }
+
+   .wordpress a {
+      @apply text-blue-500 font-medium hover:underline
+   }
+
+   .wordpress img {
+      @apply rounded
+   }
+
+   .wp-block-group {
+      @apply md:mb-8
+   }
+
+   .wp-block-media-text {
+      @apply md:flex md:items-center md:h-96
+   }
+
+   .wp-block-media-text__content {
+      @apply md:pl-8
+   }
+
+   .wp-block-media-text__media img {
+      @apply md:rounded-l-lg md:rounded-r-none md:h-96 md:object-cover
+   }
+
+   .has-media-on-the-right .wp-block-media-text__media {
+      @apply md:order-2
+   }
+
+   .has-media-on-the-right .wp-block-media-text__media img {
+      @apply md:rounded-r-lg md:rounded-l-none
+   }
+
+   .has-media-on-the-right .wp-block-media-text__content {
+      @apply md:pr-8
+   }
+
+   .wp-block-media-text__media {
+      @apply md:w-1/2 md:h-96
+   }
+
+   .wp-block-media-text__content {
+      @apply md:w-1/2
+   }
+
+   .wp-block-image {
+      @apply md:my-10
+   }
+
+   .wp-block-image img {
+      @apply md:max-h-128 lg:max-h-160 md:object-cover md:w-auto rounded
+   }
+
+   .wp-block-image figcaption {
+      @apply text-gray-500 text-sm mb-4 font-normal
+   }
+
+   .money-saving {
+      @apply bg-blue-100 rounded-lg my-4 py-2 md:py-4 px-4 md:px-8
+   }
+}
+
+@layer utilities {
    .bg-blur-3 {
       backdrop-filter: blur(3px);
    }

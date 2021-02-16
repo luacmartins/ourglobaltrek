@@ -1,6 +1,6 @@
 import fetcher, { swrFetcher } from './fetcher'
-import useSWR, { useSWRInfinite } from 'swr'
-import { menu, page, allPosts, allPhotos, allPostPaths, allPhotoPaths, postBySlug, postByCategories, photoByCategories, photoBySlug, allCategories } from '../queries'
+import { useSWRInfinite } from 'swr'
+import { menu, page, allPosts, allPhotos, allPostPaths, allPhotoPaths, postBySlug, postByCategories, photoByCategories, photoBySlug, allCategories, allPhotoCategories } from '../queries'
 
 const uri = process.env.NEXT_PUBLIC_API_URI
 
@@ -49,6 +49,30 @@ export async function getCategories(parent) {
    return data?.categories?.nodes
 }
 
+export async function getPhotoCategories() {
+   const data = await fetcher(allPhotoCategories)
+   const hash = {}
+   data?.categories?.nodes.forEach(item => {
+      if (item.photos.nodes.length > 0 && item.parent) {
+         hash[item.parent.node.name] ?
+            hash[item.parent.node.name].children.nodes.push({ name: item.name, databaseId: item.databaseId })
+            :
+            hash[item.parent.node.name] = {
+               databaseId: item.parent.node.databaseId,
+               name: item.parent.node.name,
+               children: {
+                  nodes: [{
+                     name: item.name,
+                     databaseId: item.databaseId
+                  }]
+               }
+            }
+      }
+   })
+   const result = Object.keys(hash).map(key => hash[key])
+   return result
+}
+
 export function getPostsWithFilters(query, initialContent) {
    // Set initial cached data only for default query, ommit it for other queries to fetch data and cache it.
    // If initial data is not set to undefined, swr will use it as initial data for each new set of requests.
@@ -73,21 +97,6 @@ export function getPostsWithFilters(query, initialContent) {
       error,
    }
 }
-
-// export function getPhotosWithFilters(variables, initialContent) {
-//    const initialQuery = photoByCategories({ first: 10, before: "", query: [] })
-//    const query = photoByCategories(variables)
-//    const initialData = initialQuery !== query ? undefined : { photos: { ...initialContent } }
-
-//    const { data, error } = useSWR(query, swrFetcher, { initialData })
-
-//    return {
-//       data: data?.photos?.nodes,
-//       pageInfo: data?.photos?.pageInfo,
-//       isLoading: !data?.photos && !error,
-//       error
-//    }
-// }
 
 export function getPhotosWithFilters(query, initialContent) {
    const initialData = (query.length === 0) ? [{ photos: { ...initialContent } }] : undefined

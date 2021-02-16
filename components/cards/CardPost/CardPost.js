@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import moment from 'moment'
 
 export default function CardPost({ data, featured }) {
@@ -18,14 +19,18 @@ export default function CardPost({ data, featured }) {
          <div className={"w-full flex " + `${featured ? 'flex-col md:flex-row' : 'justify-between items-center md:flex-col'}`}>
             {/* IMAGE */}
             <Link href={`/travel-blog/${slug}`}>
-               <a className={`${featured ? 'w-full md:w-1/2 lg:mr-8' : 'w-24 h-24 md:w-full md:h-48 order-2 md:order-none'}` + " overflow-hidden block rounded"}>
-                  <img className="w-full h-full object-cover transform transition-transform hover:scale-110 duration-300" src={sourceUrl} srcSet={srcSet} alt=".." />
+               <a className={`${featured ? 'w-full md:w-1/2 lg:mr-8 h-48 md:h-64 lg:h-96' : 'w-24 h-24 md:w-full md:h-48 order-2 md:order-none'}` + " relative overflow-hidden block rounded"}>
+                  <Image
+                     className={'object-cover transform transition-transform hover:scale-110 duration-300'}
+                     src={sourceUrl}
+                     layout={'fill'}
+                  />
                </a>
             </Link>
 
             <div className={`${featured ? 'w-full md:w-1/2 md:pl-10 xl:pl-12 flex flex-col justify-center mt-4 md:mt-0' : 'w-full flex-1 pr-4 md:pr-0 md:mt-4'}`}>
                {/* COUNTRY & TITLE */}
-               {categories.nodes[0] && <div className="text-blue-500 font-medium text-sm">
+               {categories.nodes[0] && <div className="text-blue-500 font-medium text-sm capitalize">
                   {categories.nodes[0].name}
                </div>}
                <Link href={`/travel-blog/${slug}`} >

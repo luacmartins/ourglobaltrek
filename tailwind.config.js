@@ -15,8 +15,13 @@ module.exports = {
             260: '65rem'
          },
          maxHeight: {
+            128: '32rem',
+            160: '40rem',
             '1/2': '50%',
             '3/4': '75%'
+         },
+         width: {
+
          },
          zIndex: {
             '-10': -10

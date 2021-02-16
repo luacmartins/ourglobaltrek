@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import { useState } from 'react'
-import { getMenu, getAllPhotos, getCategories, getPhotosWithFilters } from '../../api/useAPI'
+import { getMenu, getAllPhotos, getCategories, getPhotoCategories, getPhotosWithFilters } from '../../api/useAPI'
 import Layout from '../../components/layouts/Layout'
 import Filters from '../../components/common/Filters'
 import CardPhotoList from '../../components/cards/CardPhotoList'
@@ -31,7 +31,7 @@ export default function Photography({ links, categories, initialData }) {
 export async function getStaticProps() {
    const links = await getMenu()
    const data = await getAllPhotos(10)
-   const listCategories = await getCategories(1984)
+   const listCategories = await getPhotoCategories()
    const mainCategories = await getCategories(2096)
 
    return {

@@ -1,4 +1,5 @@
 export { default as allCategories } from './allCategories';
+export { default as allPhotoCategories } from './allPhotoCategories';
 export { default as allPhotoPaths } from './allPhotoPaths';
 export { default as allPhotos } from './allPhotos';
 export { default as allPostPaths } from './allPostPaths';

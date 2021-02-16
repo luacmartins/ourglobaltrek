@@ -4,11 +4,11 @@ export default function HeroPage({ image, title, tags }) {
          <div className="relative top-0 w-screen h-96 md:h-132 lg:h-164">
             {/* GRADIENTS */}
             <img className="absolute w-full h-96 md:h-132 lg:h-164 object-cover -z-10" src={image} alt=".." />
-            <div className="absolute inset-0 w-3/5 h-120 lg:h-screen bg-gradient-to-r from-white to-transparent opacity-80 -z-10"></div>
+            <div className="absolute inset-0 w-3/5 h-96 md:h-132 lg:h-164 bg-gradient-to-r from-white to-transparent opacity-80 -z-10"></div>
             <div className="absolute top-0 right-0 w-screen h-32 bg-gradient-to-b from-white to-transparent -z-10"></div>
             <div className="absolute bottom-0 w-screen h-1/2 bg-gradient-to-t from-white to-transparent -z-10"></div>
 
-            <div className="absolute bottom-0 mb-8 md:mb-16 lg:mb-32 mx-4 md:mx-8 xl:mx-20 md:w-1/2 rounded-lg overflow-hidden ">
+            <div className="absolute bottom-0 mb-8 md:mb-16 lg:mb-32 mx-4 md:mx-8 xl:mx-20 md:w-3/4 rounded-lg overflow-hidden ">
                {/* TITLE */}
                <div className="text-4xl md:text-5xl lg:text-6xl font-semibold">{title}</div>
 

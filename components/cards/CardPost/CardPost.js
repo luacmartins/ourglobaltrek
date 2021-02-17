@@ -1,6 +1,7 @@
-import Link from "next/link";
-import Image from "next/image";
-import moment from "moment";
+import Link from "next/link"
+import Image from "next/image"
+import moment from "moment"
+import useLoader from "../../hooks/useLoader"
 
 export default function CardPost({ data, featured }) {
   const {
@@ -12,9 +13,10 @@ export default function CardPost({ data, featured }) {
     categories,
     slug,
     excerpt,
-  } = data;
+  } = data
 
-  const tags = [moment(date).format("MMM D, YYYY")];
+  const tags = [moment(date).format("MMM D, YYYY")]
+  const loader = useLoader()
 
   return (
     <>
@@ -40,14 +42,15 @@ export default function CardPost({ data, featured }) {
             }
           >
             <Image
-              className={
-                "object-cover transform transition-transform hover:scale-110 duration-300 block rounded"
-              }
+              loader={loader}
               src={sourceUrl}
-              sizes="300px"
+              sizes='300px'
               width={featured ? 800 : 300}
               height={featured ? 600 : 200}
               layout={"responsive"}
+              className={
+                "object-cover transform transition-transform hover:scale-110 duration-300 block rounded"
+              }
             />
           </a>
         </Link>
@@ -61,20 +64,20 @@ export default function CardPost({ data, featured }) {
         >
           {/* COUNTRY & TITLE */}
           {categories.nodes[0] && (
-            <div className="text-blue-500 font-medium text-sm capitalize">
+            <div className='text-blue-500 font-medium text-sm capitalize'>
               {categories.nodes[0].name}
             </div>
           )}
           <Link href={`/travel-blog/${slug}`}>
             <a>
-              <div className="text-xl md:text-2xl font-semibold line-clamp-2 leading-7 hover:underline">
+              <div className='text-xl md:text-2xl font-semibold line-clamp-2 leading-7 hover:underline'>
                 {title}
               </div>
             </a>
           </Link>
 
           {/* TAGS */}
-          <div className="flex items-center font-medium mt-1 text-xs space-x-1 text-gray-500">
+          <div className='flex items-center font-medium mt-1 text-xs space-x-1 text-gray-500'>
             {tags.map((tag, i) => (
               <div key={i}>
                 <span>{tag}</span>
@@ -99,5 +102,5 @@ export default function CardPost({ data, featured }) {
         </div>
       </div>
     </>
-  );
+  )
 }

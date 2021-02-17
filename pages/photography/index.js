@@ -55,7 +55,7 @@ export async function getStaticProps() {
   const data = await getAllPhotos(10)
   const listCategories = await getPhotoCategories()
   const mainCategories = await getCategories(2096)
-  console.log(data)
+
   return {
     props: {
       links,

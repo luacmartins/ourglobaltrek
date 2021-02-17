@@ -28,7 +28,7 @@ export async function getPageBySlug(slug) {
 
 export async function getAllPostPaths() {
   const data = await fetcher(allPostPaths)
-  return data?.posts?.nodes?.map(path => `/travel-blog/${path.slug}`)
+  return data?.posts?.nodes?.map(slug => ({ params: slug }))
 }
 
 export async function getAllPhotoPaths() {

@@ -14,7 +14,7 @@ export default function HeroHomeMobile({ data }) {
 
   return (
     <>
-      <div className='md:hidden relative top-0 w-screen h-full'>
+      <div className='md:hidden relative top-0 w-screen h-176'>
         <div className='absolute top-0 right-0 w-screen h-24 bg-gradient-to-b from-white to-transparent'></div>
         <div className='absolute w-full h-120'>
           <Image

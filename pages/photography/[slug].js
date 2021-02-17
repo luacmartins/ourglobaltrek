@@ -6,7 +6,7 @@ import GalleryMobile from "../../components/common/GalleryMobile"
 import { getAllPhotoPaths, getPhotoBySlug } from "../../api/useAPI"
 
 export default function Photo({ photos }) {
-  const { title, content } = photos
+  const { content } = photos
   const optimizedImages = useOptimizedImage(content)
   const images = optimizedImages.split("\n\n\n\n")
   const { isDesktop } = useSize()
@@ -14,7 +14,7 @@ export default function Photo({ photos }) {
   return (
     <>
       <Head>
-        <title>ourglobaltrek - {title}</title>
+        <title>ourglobaltrek - Photography</title>
         <link rel='icon' href='/' />
       </Head>
 

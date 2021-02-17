@@ -30,7 +30,7 @@ export default function Photo({ photos }) {
 export async function getStaticPaths() {
   const allPaths = await getAllPhotoPaths()
   return {
-    paths: allPaths.map(path => `/photography/${path.slug}`),
+    paths: allPaths,
     fallback: true,
   }
 }

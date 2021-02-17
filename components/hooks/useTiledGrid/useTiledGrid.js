@@ -2,7 +2,7 @@ export default function useTiledGallery() {
   const getSpan = i => {
     const row = i === 0 || i % 6 === 0 ? 2 : 1
     const col = i === 1 || i === 4 || i % 6 === 1 || i % 6 === 4 ? 2 : 1
-    return `${row === 1 ? "md:col-span-1" : "md:col-span-2"} ${
+    return `${row === 1 ? "md:row-span-1" : "md:row-span-2"} ${
       col === 1 ? "md:col-span-1" : "md:col-span-2"
     }`
   }

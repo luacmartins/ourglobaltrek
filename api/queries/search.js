@@ -1,5 +1,5 @@
 export default function search({ first, before, query }) {
-   return `query postByCategories {
+   return `query search {
   posts(first: ${first}, before: "${before}", where: { search: "${query}" }) {
     nodes {
       date

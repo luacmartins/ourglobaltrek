@@ -1,12 +1,15 @@
+import Image from "next/image";
 import Newsletter from '../../common/Newsletter'
 
 export default function HeroHome({ data }) {
-   const { title, content, featuredImage: { node: { sourceUrl, srcSet } } } = data
+   const { title, content, featuredImage: { node: { sourceUrl } } } = data
 
    return (
       <>
          <div className="hidden md:block relative">
-            <img className="w-screen h-176 lg:h-screen object-cover" src={sourceUrl} srcSet={srcSet} alt=".." />
+            <div className="w-screen h-176 lg:min-h-176 lg:h-screen">
+               <Image className="object-cover" src={sourceUrl} layout={'fill'} alt=".." />
+            </div>
 
             {/* GRADIENTS */}
             <div className="absolute top-0 right-0 w-screen h-24 bg-gradient-to-b from-white to-transparent"></div>
@@ -21,8 +24,6 @@ export default function HeroHome({ data }) {
                {/* NEWSLETTER */}
                <Newsletter />
             </div>
-
-
          </div>
       </>
    )

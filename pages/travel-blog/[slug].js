@@ -14,7 +14,7 @@ export default function Post({ links, post }) {
       node: { name: author },
     },
     featuredImage: {
-      node: { sourceUrl, srcSet },
+      node: { sourceUrl },
     },
   } = post
   const published = `Published ${moment(date).fromNow()} by ${author}`
@@ -44,7 +44,7 @@ export async function getStaticPaths() {
 
   return {
     paths: allPaths,
-    fallback: true,
+    fallback: false,
   }
 }
 

@@ -33,7 +33,7 @@ export async function getAllPostPaths() {
 
 export async function getAllPhotoPaths() {
   const data = await fetcher(allPhotoPaths)
-  return data?.photos?.nodes?.map(path => `/photography/${path.slug}`)
+  return data?.photos?.nodes?.map(slug => ({ params: slug }))
 }
 
 export async function getAllPosts(num) {
@@ -162,7 +162,6 @@ export function getPhotosWithFilters(query, initialContent) {
 export function getSearch(query) {
   const getKey = (pageIndex, previousPageData) => {
     // first page, we don't have `previousPageData`
-    console.log(search({ first: 12, before: "", query }))
     if (pageIndex === 0) return search({ first: 12, before: "", query })
 
     // get next page cursor from previous page data and return new variables

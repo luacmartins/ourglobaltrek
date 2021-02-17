@@ -11,6 +11,7 @@ export default function CardPhoto({ data, height }) {
     },
     categories: { nodes: categories },
   } = data
+
   const loader = useLoader()
 
   return (

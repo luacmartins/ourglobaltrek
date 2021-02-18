@@ -9,7 +9,7 @@ export default function GalleryMobile({ images }) {
       <div className='fixed inset-0 z-10 flex flex-col w-screen h-screen bg-white bg-opacity-75 bg-blur-5'>
         {/* CLOSE */}
         <div className='flex justify-end w-full h-14'>
-          <button className='flex items-center justify-center text-gray-600 h-14 w-14 focus:outline-none hover:text-gray-900 transition-colors'>
+          <button className='flex items-center justify-center text-gray-600 transition-colors h-14 w-14 focus:outline-none hover:text-gray-900'>
             <Link href={"/photography"}>
               <a>
                 <svg
@@ -25,7 +25,7 @@ export default function GalleryMobile({ images }) {
         </div>
 
         {/* CONTENT */}
-        <div className='flex flex-col items-center flex-1 px-4 mb-4 overflow-y-scroll md:mb-12 md:px-12 xl:px-20'>
+        <div className='flex flex-col items-center flex-1 px-4 pb-16 overflow-y-scroll md:px-12'>
           {/* IMAGE */}
           {data.map((image, i) => (
             <div key={i} dangerouslySetInnerHTML={{ __html: image }}></div>

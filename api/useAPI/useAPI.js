@@ -16,6 +16,9 @@ import {
   search,
 } from "../queries"
 
+const postPageSize = process.env.NEXT_PUBLIC_POST_PAGE_SIZE
+const photoPageSize = process.env.NEXT_PUBLIC_PHOTO_PAGE_SIZE
+
 export async function getMenu() {
   const data = await fetcher(menu)
   return data?.menuItems?.nodes
@@ -26,38 +29,27 @@ export async function getPageBySlug(slug) {
   return data?.page
 }
 
-export async function getAllPostPaths() {
-  const data = await fetcher(allPostPaths)
-  return data?.posts?.nodes?.map(slug => ({ params: slug }))
+export async function getAllContentPaths(type) {
+  const query = type === "photos" ? allPhotoPaths : allPostPaths
+  const data = await fetcher(query)
+  return data?.[type]?.nodes?.map(slug => ({ params: slug }))
 }
 
-export async function getAllPhotoPaths() {
-  const data = await fetcher(allPhotoPaths)
-  return data?.photos?.nodes?.map(slug => ({ params: slug }))
+export async function getAllContent(type) {
+  const query = type === "photos" ? allPhotos : allPosts
+  const first = type === "photos" ? photoPageSize * 2 : postPageSize * 2
+
+  const data = await fetcher(query, { variables: { first } })
+  return data?.[type]
 }
 
-export async function getAllPosts(num) {
-  const data = await fetcher(allPosts, { variables: { first: num } })
-  return data?.posts
-}
+export async function getContentBySlug(slug, type) {
+  const query = type === "photo" ? photoBySlug : postBySlug
 
-export async function getAllPhotos(num) {
-  const data = await fetcher(allPhotos, { variables: { first: num } })
-  return data?.photos
-}
-
-export async function getPostBySlug(slug) {
-  const data = await fetcher(postBySlug, {
+  const data = await fetcher(query, {
     variables: { id: slug, idType: "SLUG" },
   })
-  return data?.post
-}
-
-export async function getPhotoBySlug(slug) {
-  const data = await fetcher(photoBySlug, {
-    variables: { id: slug, idType: "SLUG" },
-  })
-  return data?.photo
+  return data?.[type]
 }
 
 export async function getCategories(parent) {
@@ -89,71 +81,50 @@ export async function getPhotoCategories() {
           })
     }
   })
+
   const result = Object.keys(hash).map(key => hash[key])
   return result
 }
 
-export function getPostsWithFilters(query, initialContent) {
+export function getContentWithFilters(query, initialContent, type) {
   // Set initial cached data only for default query, ommit it for other queries to fetch data and cache it.
   // If initial data is not set to undefined, swr will use it as initial data for each new set of requests.
-  const initialData =
-    query.length === 0 ? [{ posts: { ...initialContent } }] : undefined
+  const initialData = query.length === 0 ? [{ [type]: { ...initialContent } }] : undefined
+  const pageSize = type === "posts" ? postPageSize : photoPageSize
 
   const getKey = (pageIndex, previousPageData) => {
-    // first page, we don't have `previousPageData`
-    if (pageIndex === 0)
-      return postByCategories({ first: 12, before: "", query })
+    if (pageIndex === 0) {
+      const variables = { first: 2 * pageSize, before: "", query }
+      return type === "posts" ? postByCategories(variables) : photoByCategories(variables)
+    }
 
-    // get next page cursor from previous page data and return new variables
-    const before = previousPageData?.posts?.pageInfo?.endCursor
-    return postByCategories({ first: 12, before, query })
+    const before = previousPageData?.[type]?.pageInfo?.endCursor
+    const variables = { first: postPageSize, before, query }
+    return type === "posts" ? postByCategories(variables) : photoByCategories(variables)
   }
 
   const { data, error, size, setSize } = useSWRInfinite(getKey, swrFetcher, {
     initialData,
   })
 
-  return {
-    data:
-      data && data.length > 0
-        ? [].concat(...data.map(item => item.posts.nodes))
-        : data?.posts?.nodes,
-    isLoading:
-      (!data && !error) ||
-      (size > 0 && data && typeof data[size - 1] === "undefined"),
-    isReachingEnd:
-      data && !data[data?.length - 1]?.posts?.pageInfo?.hasNextPage,
-    loadMore: () => setSize(size + 1),
-    error,
-  }
-}
+  const dataLength = data?.reduce((sum, item) => (sum += item[type].nodes.length), 0) || 0
 
-export function getPhotosWithFilters(query, initialContent) {
-  const initialData =
-    query.length === 0 ? [{ photos: { ...initialContent } }] : undefined
+  const displayData =
+    data && data.length > 0
+      ? [].concat(...data.map(item => item[type].nodes)).slice(0, size * pageSize)
+      : data?.[type]?.nodes.slice(0, size * pageSize)
 
-  const getKey = (pageIndex, previousPageData) => {
-    if (pageIndex === 0)
-      return photoByCategories({ first: 10, before: "", query })
+  const isReachingEnd =
+    data &&
+    !data[data?.length - 1]?.[type]?.pageInfo?.hasNextPage &&
+    displayData.length === dataLength
 
-    const before = previousPageData?.photos?.pageInfo?.endCursor
-    return photoByCategories({ first: 10, before, query })
-  }
-
-  const { data, error, size, setSize } = useSWRInfinite(getKey, swrFetcher, {
-    initialData,
-  })
+  const isLoading = (!data && !error) || (size > 0 && data && typeof data[size - 1] === "undefined")
 
   return {
-    data:
-      data && data.length > 0
-        ? [].concat(...data.map(item => item.photos.nodes))
-        : data?.photos?.nodes,
-    isLoading:
-      (!data && !error) ||
-      (size > 0 && data && typeof data[size - 1] === "undefined"),
-    isReachingEnd:
-      data && !data[data?.length - 1]?.photos?.pageInfo?.hasNextPage,
+    data: displayData,
+    isLoading,
+    isReachingEnd,
     loadMore: () => setSize(size + 1),
     error,
   }
@@ -176,11 +147,8 @@ export function getSearch(query) {
       data && data.length > 0
         ? [].concat(...data.map(item => item.posts.nodes))
         : data?.posts?.nodes,
-    isLoading:
-      (!data && !error) ||
-      (size > 0 && data && typeof data[size - 1] === "undefined"),
-    isReachingEnd:
-      data && !data[data?.length - 1]?.posts?.pageInfo?.hasNextPage,
+    isLoading: (!data && !error) || (size > 0 && data && typeof data[size - 1] === "undefined"),
+    isReachingEnd: data && !data[data?.length - 1]?.posts?.pageInfo?.hasNextPage,
     loadMore: () => setSize(size + 1),
     error,
   }

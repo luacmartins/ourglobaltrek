@@ -2,7 +2,7 @@ import Head from "../../components/common/Head"
 import useSize from "../../components/hooks/useSize"
 import GalleryDesktop from "../../components/common/GalleryDesktop"
 import GalleryMobile from "../../components/common/GalleryMobile"
-import { getAllPhotoPaths, getPhotoBySlug } from "../../api/useAPI"
+import { getAllContentPaths, getContentBySlug } from "../../api/useAPI"
 
 export default function Photo({ photos }) {
   const { title, content } = photos
@@ -19,7 +19,7 @@ export default function Photo({ photos }) {
 }
 
 export async function getStaticPaths() {
-  const allPaths = await getAllPhotoPaths()
+  const allPaths = await getAllContentPaths("photos")
   return {
     paths: allPaths,
     fallback: false,
@@ -27,7 +27,7 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-  const photos = await getPhotoBySlug(params.slug)
+  const photos = await getContentBySlug(params.slug, "photo")
   return {
     props: {
       photos,

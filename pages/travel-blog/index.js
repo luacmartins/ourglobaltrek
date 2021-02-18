@@ -1,23 +1,24 @@
-import Head from "../../components/common/Head"
 import { useState } from "react"
-import {
-  getMenu,
-  getPageBySlug,
-  getAllPosts,
-  getCategories,
-  getPostsWithFilters,
-} from "../../api/useAPI"
+import Head from "../../components/common/Head"
 import Layout from "../../components/layouts/Layout"
 import Filters from "../../components/common/Filters"
 import CardPostList from "../../components/cards/CardPostList"
 import Pagination from "../../components/common/Pagination"
+import {
+  getMenu,
+  getPageBySlug,
+  getAllContent,
+  getCategories,
+  getContentWithFilters,
+} from "../../api/useAPI"
 
 export default function TravelBlog({ links, page, categories, initialData }) {
   const { title, seo } = page
   const [query, setQuery] = useState([])
-  const { data, isLoading, error, isReachingEnd, loadMore } = getPostsWithFilters(
+  const { data, isLoading, error, isReachingEnd, loadMore } = getContentWithFilters(
     query,
-    initialData
+    initialData,
+    "posts"
   )
 
   return (
@@ -37,7 +38,7 @@ export default function TravelBlog({ links, page, categories, initialData }) {
 
 export async function getStaticProps() {
   const links = await getMenu()
-  const data = await getAllPosts(12)
+  const data = await getAllContent("posts")
   const page = await getPageBySlug("travel-blog")
   const listCategories = await getCategories(1984)
   const mainCategories = await getCategories(2096)

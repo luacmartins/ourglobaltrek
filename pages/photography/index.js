@@ -1,25 +1,26 @@
-import Head from "../../components/common/Head"
 import { useState } from "react"
-import {
-  getMenu,
-  getPageBySlug,
-  getAllPhotos,
-  getCategories,
-  getPhotoCategories,
-  getPhotosWithFilters,
-} from "../../api/useAPI"
+import Head from "../../components/common/Head"
 import Layout from "../../components/layouts/Layout"
 import Filters from "../../components/common/Filters"
 import CardPhotoList from "../../components/cards/CardPhotoList"
 import Pagination from "../../components/common/Pagination"
+import {
+  getMenu,
+  getPageBySlug,
+  getAllContent,
+  getCategories,
+  getPhotoCategories,
+  getContentWithFilters,
+} from "../../api/useAPI"
 
 export default function Photography({ links, page, categories, initialData }) {
   const { title, seo } = page
 
   const [query, setQuery] = useState([])
-  const { data, isLoading, error, isReachingEnd, loadMore } = getPhotosWithFilters(
+  const { data, isLoading, error, isReachingEnd, loadMore } = getContentWithFilters(
     query,
-    initialData
+    initialData,
+    "photos"
   )
 
   return (
@@ -39,7 +40,7 @@ export default function Photography({ links, page, categories, initialData }) {
 
 export async function getStaticProps() {
   const links = await getMenu()
-  const data = await getAllPhotos(10)
+  const data = await getAllContent("photos")
   const page = await getPageBySlug("photography")
   const listCategories = await getPhotoCategories()
   const mainCategories = await getCategories(2096)

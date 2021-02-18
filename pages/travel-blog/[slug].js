@@ -3,7 +3,7 @@ import Layout from "../../components/layouts/Layout"
 import HeroPage from "../../components/heroes/HeroPage"
 import Article from "../../components/common/Article"
 import moment from "moment"
-import { getMenu, getAllPostPaths, getPostBySlug } from "../../api/useAPI"
+import { getMenu, getAllContentPaths, getContentBySlug } from "../../api/useAPI"
 
 export default function Post({ links, post }) {
   const {
@@ -38,7 +38,7 @@ export default function Post({ links, post }) {
 }
 
 export async function getStaticPaths() {
-  const allPaths = await getAllPostPaths()
+  const allPaths = await getAllContentPaths("posts")
 
   return {
     paths: allPaths,
@@ -48,7 +48,7 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }) {
   const links = await getMenu()
-  const post = await getPostBySlug(params.slug)
+  const post = await getContentBySlug(params.slug, "post")
   return {
     props: {
       links,

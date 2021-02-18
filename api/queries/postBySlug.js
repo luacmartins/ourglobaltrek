@@ -14,5 +14,9 @@ export default `query postBySlug($id: ID!, $idType: PostIdType!) {
       }
     }
     title
+    seo {
+      metaDesc
+      opengraphDescription
+    }
   }
 }`

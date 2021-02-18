@@ -1,4 +1,4 @@
-import Head from 'next/head'
+import Head from '../components/common/Head'
 import { getMenu, getAllPosts, getAllPhotos, getPageBySlug } from '../api/useAPI'
 import useSize from '../components/hooks/useSize'
 import HeroHomeDesktop from '../components/heroes/HeroHomeDesktop'
@@ -12,27 +12,36 @@ export default function Home({ links, page, posts, photos }) {
    const { isMobile } = useSize()
 
    return (
-      <>
-         <Head>
-            <title>ourglobaltrek</title>
-            <link rel="icon" href="/" />
-         </Head>
+     <>
+       <Head title={page.title} description={page.seo} />
+       <Layout links={links}>
+         {/* HERO */}
+         {isMobile ? (
+           <HeroHomeMobile data={page} />
+         ) : (
+           <HeroHomeDesktop data={page} />
+         )}
 
-         <Layout links={links}>
-            {/* HERO */}
-            {isMobile ? <HeroHomeMobile data={page} /> : <HeroHomeDesktop data={page} />}
+         {/* POSTS */}
+         <Section
+           title={"Latest posts"}
+           link={"More posts"}
+           href={"/travel-blog"}
+         >
+           <CardPostList data={posts} home />
+         </Section>
 
-            {/* POSTS */}
-            <Section title={'Latest posts'} link={'More posts'} href={'/travel-blog'}>
-               <CardPostList data={posts} home />
-            </Section>
-
-            {/* PHOTOGRAPHY */}
-            <Section tag={'Explore'} title={'Photography'} link={'more galleries'} href={'/photography'}>
-               <CardPhotoList data={photos} />
-            </Section>
-         </Layout>
-      </>
+         {/* PHOTOGRAPHY */}
+         <Section
+           tag={"Explore"}
+           title={"Photography"}
+           link={"more galleries"}
+           href={"/photography"}
+         >
+           <CardPhotoList data={photos} />
+         </Section>
+       </Layout>
+     </>
    )
 }
 

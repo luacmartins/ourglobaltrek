@@ -1,18 +1,15 @@
-import Head from 'next/head'
+import Head from "../components/common/Head"
 import { getMenu, getPageBySlug } from '../api/useAPI'
 import Layout from '../components/layouts/Layout'
 import HeroPage from '../components/heroes/HeroPage'
 import Article from '../components/common/Article'
 
 export default function OurStory({ links, page }) {
-   const { title, content, featuredImage: { node: { srcSet, sourceUrl } } } = page
+   const { title, seo, content, featuredImage: { node: { sourceUrl } } } = page
 
    return (
       <>
-         <Head>
-            <title>ourglobaltrek - {title}</title>
-            <link rel="icon" href="/" />
-         </Head>
+         <Head title={title} description={seo} />
 
          <Layout links={links}>
             {/* HERO */}

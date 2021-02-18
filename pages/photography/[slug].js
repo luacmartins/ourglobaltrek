@@ -1,27 +1,19 @@
-import Head from "next/head"
+import Head from "../../components/common/Head"
 import useSize from "../../components/hooks/useSize"
-import useOptimizedImage from "../../components/hooks/useOptimizedImage"
 import GalleryDesktop from "../../components/common/GalleryDesktop"
 import GalleryMobile from "../../components/common/GalleryMobile"
 import { getAllPhotoPaths, getPhotoBySlug } from "../../api/useAPI"
 
 export default function Photo({ photos }) {
   const { title, content } = photos
-  const images = content.split("\n\n\n\n")
   const { isDesktop } = useSize()
+  const images = content.split("\n\n\n\n")
 
   return (
     <>
-      <Head>
-        <title>ourglobaltrek - {title}</title>
-        <link rel='icon' href='/' />
-      </Head>
+      <Head title={title} description={photos.seo} />
 
-      {isDesktop ? (
-        <GalleryDesktop images={images} />
-      ) : (
-        <GalleryMobile images={images} />
-      )}
+      {isDesktop ? <GalleryDesktop images={images} /> : <GalleryMobile images={images} />}
     </>
   )
 }

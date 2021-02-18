@@ -1,4 +1,4 @@
-import Head from "next/head"
+import Head from "../../components/common/Head"
 import Layout from "../../components/layouts/Layout"
 import HeroPage from "../../components/heroes/HeroPage"
 import Article from "../../components/common/Article"
@@ -9,6 +9,7 @@ export default function Post({ links, post }) {
   const {
     title,
     content,
+    seo,
     date,
     author: {
       node: { name: author },
@@ -23,10 +24,7 @@ export default function Post({ links, post }) {
 
   return (
     <>
-      <Head>
-        <title>ourglobaltrek - {title}</title>
-        <link rel='icon' href='/' />
-      </Head>
+      <Head title={title} description={seo} />
 
       <Layout links={links}>
         {/* HERO */}

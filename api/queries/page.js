@@ -15,5 +15,10 @@ export default `query Page($id: ID!, $idType: PageIdType!) {
         name
       }
     }
+    seo {
+      metaDesc
+      opengraphDescription
+    }
   }
-}`
+}
+`

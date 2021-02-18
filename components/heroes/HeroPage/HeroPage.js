@@ -22,9 +22,9 @@ export default function HeroPage({ image, title, tags }) {
 
         <div className='absolute bottom-0 mb-8 md:mb-16 lg:mb-32 mx-4 md:mx-8 xl:mx-20 md:w-3/4 rounded-lg overflow-hidden '>
           {/* TITLE */}
-          <div className='text-4xl md:text-5xl lg:text-6xl font-semibold'>
+          <h1 className='text-4xl md:text-5xl lg:text-6xl font-semibold'>
             {title}
-          </div>
+          </h1>
 
           {/* TAG */}
           {tags && (

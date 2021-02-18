@@ -30,7 +30,7 @@ export default function Photography({ links, categories, initialData }) {
       </Head>
 
       <Layout links={links}>
-        <div className='mt-24 md:mt-32 lg:mt-40 mx-4 md:mx-8 xl:mx-20'>
+        <div className='mx-4 mt-24 md:mt-32 lg:mt-40 md:mx-8 xl:mx-20'>
           {!error && (
             <Filters
               categories={categories}

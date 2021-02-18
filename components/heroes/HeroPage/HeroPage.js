@@ -20,15 +20,15 @@ export default function HeroPage({ image, title, tags }) {
         <div className='absolute top-0 right-0 w-screen h-32 bg-gradient-to-b from-white to-transparent -z-10'></div>
         <div className='absolute bottom-0 w-screen h-1/2 bg-gradient-to-t from-white to-transparent -z-10'></div>
 
-        <div className='absolute bottom-0 mb-8 md:mb-16 lg:mb-32 mx-4 md:mx-8 xl:mx-20 md:w-3/4 rounded-lg overflow-hidden '>
+        <div className='absolute bottom-0 mx-4 mb-8 overflow-hidden rounded-lg md:mb-16 lg:mb-32 md:mx-8 xl:mx-20 md:w-3/4 '>
           {/* TITLE */}
-          <h1 className='text-4xl md:text-5xl lg:text-6xl font-semibold'>
+          <h1 className='text-4xl font-semibold md:text-5xl lg:text-6xl'>
             {title}
           </h1>
 
           {/* TAG */}
           {tags && (
-            <div className='flex items-center font-medium mt-2 text-xs md:text-sm xl:text-base space-x-1 text-gray-500'>
+            <div className='flex items-center mt-2 text-xs font-medium text-gray-500 space-x-1 md:text-sm xl:text-base'>
               {tags.map((tag, i) => (
                 <div key={i}>
                   <span>{tag}</span>

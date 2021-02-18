@@ -12,7 +12,7 @@ export default function CardPhotoList({ data, error }) {
 
   return (
     <>
-      <div className='grid grid-cols-1 md:grid-cols-3 mb-12 gap-y-6 md:gap-4 justify-center mt-10'>
+      <div className='justify-center mt-10 mb-12 grid grid-cols-1 md:grid-cols-3 gap-y-6 md:gap-4'>
         {data &&
           data.map((post, i) => (
             <Reveal

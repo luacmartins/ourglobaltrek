@@ -64,20 +64,20 @@ export default function CardPost({ data, featured }) {
         >
           {/* COUNTRY & TITLE */}
           {categories.nodes[0] && (
-            <div className='text-blue-500 font-medium text-sm capitalize'>
+            <div className='text-sm font-medium text-blue-500 capitalize'>
               {categories.nodes[0].name}
             </div>
           )}
           <Link href={`/travel-blog/${slug}`}>
             <a>
-              <div className='text-xl md:text-2xl font-semibold line-clamp-2 leading-7 hover:underline'>
+              <div className='text-xl font-semibold md:text-2xl line-clamp-2 leading-7 hover:underline'>
                 {title}
               </div>
             </a>
           </Link>
 
           {/* TAGS */}
-          <div className='flex items-center font-medium mt-1 text-xs space-x-1 text-gray-500'>
+          <div className='flex items-center mt-1 text-xs font-medium text-gray-500 space-x-1'>
             {tags.map((tag, i) => (
               <div key={i}>
                 <span>{tag}</span>

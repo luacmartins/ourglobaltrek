@@ -9,7 +9,7 @@ export default function Layout({ links, children }) {
 
    return (
       <>
-         <div className="flex flex-col min-h-screen justify-center text-gray-800">
+         <div className="flex flex-col justify-center min-h-screen text-gray-800">
             {/* NAVBARS */}
             {isMobile ? <NavbarMobile links={links} /> : <NavbarDesktop links={links} />}
 

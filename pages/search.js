@@ -17,7 +17,7 @@ export default function Search({ links }) {
          </Head>
 
          <Layout links={links}>
-            <div className="mt-24 md:mt-32 lg:mt-40 mx-4 md:mx-8 xl:mx-20">
+            <div className="mx-4 mt-24 md:mt-32 lg:mt-40 md:mx-8 xl:mx-20">
                <header className="md:text-xl md:font-medium">Your search results for "{query}"</header>
                <CardPostList data={data} error={error} />
                <Pagination isLoading={isLoading} isReachingEnd={isReachingEnd} loadMore={loadMore} />

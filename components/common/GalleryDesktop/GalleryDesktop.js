@@ -8,10 +8,10 @@ export default function GalleryDesktop({ images }) {
 
   return (
     <>
-      <div className='flex fixed w-screen h-screen inset-0 flex-col bg-white bg-opacity-75 bg-blur-5 z-10'>
+      <div className='fixed inset-0 z-10 flex flex-col w-screen h-screen bg-white bg-opacity-75 bg-blur-5'>
         {/* CLOSE */}
-        <div className='w-full h-14 flex justify-end'>
-          <button className='h-14 w-14 flex items-center text-gray-600 justify-center focus:outline-none hover:text-gray-900 transition-colors'>
+        <div className='flex justify-end w-full h-14'>
+          <button className='flex items-center justify-center text-gray-600 transition-colors h-14 w-14 focus:outline-none hover:text-gray-900'>
             <Link href={"/photography"}>
               <a>
                 <svg
@@ -28,12 +28,12 @@ export default function GalleryDesktop({ images }) {
 
         {/* CONTENT */}
         <div
-          className='absolute inset-0 mt-16 mb-14 flex flex-col items-center justify-center px-24'
+          className='absolute inset-0 flex flex-col items-center justify-center px-24 mt-16 mb-14'
           dangerouslySetInnerHTML={{ __html: data[view] }}
         ></div>
 
         {/* DOTS */}
-        <div className='absolute bottom-0 inset-x-0 flex justify-center space-x-2 mb-6'>
+        <div className='absolute inset-x-0 bottom-0 flex justify-center mb-6 space-x-2'>
           {images.map((item, i) => (
             <span
               key={i}
@@ -45,13 +45,13 @@ export default function GalleryDesktop({ images }) {
         </div>
 
         {/* CONTROLS */}
-        <div className='absolute inset-0 top-14 flex text-gray-600 justify-between'>
+        <div className='absolute inset-0 flex justify-between text-gray-600 top-14'>
           <button
             className='w-1/2 px-4 focus:outline-none hover:text-gray-900'
             onClick={slideLeft}
           >
             <svg
-              className='h-14  transition-colors fill-current transform rotate-180'
+              className='fill-current transition-colors transform rotate-180 h-14'
               xmlns='http://www.w3.org/2000/svg'
               viewBox='0 0 32 32'
               aria-hidden='true'
@@ -63,11 +63,11 @@ export default function GalleryDesktop({ images }) {
             </svg>
           </button>
           <button
-            className='w-1/2 flex justify-end items-center px-4 hover:text-gray-900 focus:outline-none'
+            className='flex items-center justify-end w-1/2 px-4 hover:text-gray-900 focus:outline-none'
             onClick={slideRight}
           >
             <svg
-              className='h-14 transition-colors fill-current'
+              className='fill-current transition-colors h-14'
               xmlns='http://www.w3.org/2000/svg'
               viewBox='0 0 32 32'
               aria-hidden='true'

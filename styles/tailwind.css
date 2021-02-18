@@ -3,19 +3,19 @@
 @tailwind utilities;
 
 .wordpress h2 {
-  @apply font-semibold text-gray-900 text-2xl mb-4 mt-6 md:mt-8 md:text-3xl;
+  @apply mt-6 mb-4 text-2xl font-semibold text-gray-900 md:mt-8 md:text-3xl;
 }
 
 .wordpress h3 {
-  @apply font-semibold text-gray-900 text-xl mb-4 mt-6;
+  @apply mt-6 mb-4 text-xl font-semibold text-gray-900;
 }
 
 .wordpress p {
-  @apply mb-6 inline;
+  @apply inline mb-6;
 }
 
 .wordpress ul {
-  @apply mb-6 mx-2 mt-4;
+  @apply mx-2 mt-4 mb-6;
 }
 
 .wordpress strong {
@@ -23,11 +23,11 @@
 }
 
 .wordpress li {
-  @apply list-inside list-disc mb-3;
+  @apply mb-3 list-disc list-inside;
 }
 
 .wordpress a {
-  @apply text-blue-500 font-medium hover:underline;
+  @apply font-medium text-blue-500 hover:underline;
 }
 
 .wordpress img {
@@ -71,19 +71,19 @@
 }
 
 .wp-block-image {
-  @apply md:my-10;
+  @apply my-6 md:my-10;
 }
 
 .wp-block-image img {
-  @apply md:max-h-128 lg:max-h-160 md:object-cover md:w-auto rounded;
+  @apply object-cover w-auto rounded h-72 md:h-128 lg:h-160;
 }
 
 .wp-block-image figcaption {
-  @apply text-gray-500 text-sm mb-4 font-normal;
+  @apply mb-4 text-sm font-normal text-gray-500;
 }
 
 .money-saving {
-  @apply bg-blue-100 rounded-lg my-4 py-2 md:py-4 px-4 md:px-8;
+  @apply px-4 py-2 my-4 bg-blue-100 rounded-lg md:py-4 md:px-8;
 }
 
 @layer utilities {

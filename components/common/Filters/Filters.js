@@ -1,14 +1,19 @@
-import useOverlay from "../../hooks/useOverlay"
-import useFilter from "../../hooks/useFilter"
+import useFilter from '../../hooks/useFilter'
 
-export default function Filters({ categories: { main, list }, query, setQuery }) {
-  const [isOpen, toggleModal] = useOverlay()
-  const { filter, showClear, add, addAll, toggle, clear, clearAll, update, close } = useFilter(
-    query,
-    main,
-    setQuery,
-    toggleModal
-  )
+export default function Filters({ categories: { main, list }, query }) {
+  const {
+    filter,
+    showClear,
+    isOpen,
+    add,
+    addAll,
+    toggle,
+    clear,
+    clearAll,
+    update,
+    close,
+    toggleModal,
+  } = useFilter(query, main)
 
   return (
     <>
@@ -18,7 +23,7 @@ export default function Filters({ categories: { main, list }, query, setQuery })
         <div className='space-x-4'>
           <span
             onClick={clearAll}
-            className={`${filter.main === "" ? "text-gray-900" : "text-gray-500"} cursor-pointer`}
+            className={`${filter.main === '' ? 'text-gray-900' : 'text-gray-500'} cursor-pointer`}
           >
             All
           </span>
@@ -27,7 +32,7 @@ export default function Filters({ categories: { main, list }, query, setQuery })
               key={item.databaseId}
               onClick={() => add(item.databaseId)}
               className={`text-gray-500 hover:text-gray-900 transition-colors cursor-pointer 
-                     ${filter.main === item.databaseId ? "text-gray-900" : ""}`}
+                     ${filter.main === item.databaseId ? 'text-gray-900' : ''}`}
             >
               {item.name}
             </span>
@@ -67,7 +72,7 @@ export default function Filters({ categories: { main, list }, query, setQuery })
                 onClick={clear}
                 className='ml-4 text-blue-500 transition-colors hover:text-blue-600 focus:outline-none'
               >
-                {filter.list.length > 0 && "Clear filters"}
+                {filter.list.length > 0 && 'Clear filters'}
               </button>
               <button
                 onClick={close}
@@ -105,8 +110,8 @@ export default function Filters({ categories: { main, list }, query, setQuery })
                           `border text-sm rounded-full px-2 py-1 mr-2 mb-2 cursor-pointer transition-colors ` +
                           `${
                             filter.list.includes(country.databaseId)
-                              ? "text-blue-500 border-blue-500"
-                              : "border-gray-500 text-gray-500 hover:text-gray-700 hover:border-gray-700 "
+                              ? 'text-blue-500 border-blue-500'
+                              : 'border-gray-500 text-gray-500 hover:text-gray-700 hover:border-gray-700 '
                           }`
                         }
                       >

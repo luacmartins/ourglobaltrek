@@ -1,9 +1,9 @@
-import { useState } from "react"
-import Head from "../../components/common/Head"
-import Layout from "../../components/layouts/Layout"
-import Filters from "../../components/common/Filters"
-import CardPhotoList from "../../components/cards/CardPhotoList"
-import Pagination from "../../components/common/Pagination"
+import { useRouter } from 'next/router'
+import Head from '../../components/common/Head'
+import Layout from '../../components/layouts/Layout'
+import Filters from '../../components/common/Filters'
+import CardPhotoList from '../../components/cards/CardPhotoList'
+import Pagination from '../../components/common/Pagination'
 import {
   getMenu,
   getPageBySlug,
@@ -11,14 +11,16 @@ import {
   getCategories,
   getPhotoCategories,
   getContentWithFilters,
-} from "../../api/useAPI"
+} from '../../api/useAPI'
 
 export default function Photography({ links, page, categories, initialData }) {
-  const { title, seo } = page
+  const router = useRouter()
+  const path = router.query?.q
+  const query = (path && [...path.split(',').map(x => parseInt(x))]) || []
 
-  const [query, setQuery] = useState([])
+  const { title, seo } = page
   const { data, isLoading, error, isReachingEnd, loadMore } = getContentWithFilters(
-    "photos",
+    'photos',
     query,
     initialData
   )
@@ -29,7 +31,7 @@ export default function Photography({ links, page, categories, initialData }) {
 
       <Layout links={links}>
         <div className='mx-4 mt-24 md:mt-32 lg:mt-40 md:mx-8 xl:mx-20'>
-          {!error && <Filters categories={categories} query={query} setQuery={setQuery} />}
+          {!error && <Filters categories={categories} query={query} />}
           <CardPhotoList data={data} error={error} />
           <Pagination isLoading={isLoading} isReachingEnd={isReachingEnd} loadMore={loadMore} />
         </div>
@@ -40,8 +42,8 @@ export default function Photography({ links, page, categories, initialData }) {
 
 export async function getStaticProps() {
   const links = await getMenu()
-  const data = await getAllContent("photos")
-  const page = await getPageBySlug("photography")
+  const data = await getAllContent('photos')
+  const page = await getPageBySlug('photography')
   const listCategories = await getPhotoCategories()
   const mainCategories = await getCategories(2096)
 

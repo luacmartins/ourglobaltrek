@@ -15,7 +15,7 @@ export default function Search({ toggle }) {
         onClick={toggle}
         className='fixed inset-0 z-10 w-screen h-screen bg-gray-300 bg-opacity-75 bg-blur-3'
       ></div>
-      <div className='fixed z-20 w-11/12 overflow-hidden transform -translate-x-1/2 bg-white rounded-lg top-1/4 left-1/2 -translate-y-1/4 h-14 md:w-1/2'>
+      <div className='fixed z-20 w-11/12 overflow-hidden bg-white rounded-lg transform -translate-x-1/2 top-1/4 left-1/2 -translate-y-1/4 h-14 md:w-1/2'>
         <form onSubmit={handleSubmit} className='flex items-center h-full text-blue-500'>
           <svg
             className='h-6 ml-4 fill-current'

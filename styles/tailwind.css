@@ -75,7 +75,7 @@
 }
 
 .wp-block-image img {
-  @apply object-cover w-auto rounded h-80 md:h-128 lg:h-160;
+  @apply object-cover w-auto rounded h-80 md:h-128 lg:h-140;
 }
 
 .wp-block-image figcaption {

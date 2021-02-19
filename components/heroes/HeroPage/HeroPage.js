@@ -1,15 +1,16 @@
-import Image from "next/image"
-import useLoader from "../../hooks/useLoader"
+import Image from '../../common/Image'
 
 export default function HeroPage({ image, title, tags }) {
-  const loader = useLoader()
-
   return (
     <>
       <div className='relative top-0 w-screen h-96 md:h-132 lg:h-164'>
         {/* GRADIENTS */}
         <div className='absolute w-full h-96 md:h-132 lg:h-164 '>
-          <Image loader={loader} src={image} className='object-cover -z-10' layout={"fill"} />
+          <Image
+            src={image}
+            className='object-cover object-right -z-10 h-96 md:h-132 lg:h-164'
+            layout={'fill'}
+          />
         </div>
         <div className='absolute inset-0 w-3/5 h-96 md:h-132 lg:h-164 bg-gradient-to-r from-white opacity-80 -z-10'></div>
         <div className='absolute top-0 right-0 w-screen h-32 bg-gradient-to-b from-white -z-10'></div>

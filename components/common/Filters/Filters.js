@@ -51,7 +51,7 @@ export default function Filters({ categories: { main, list }, query }) {
           )}
           <button
             onClick={toggleModal}
-            className='px-3 py-1 text-sm text-blue-500 transition-colors border border-blue-500 rounded md:text-base hover:border-blue-600 hover:text-blue-600'
+            className='px-3 py-1 text-sm text-blue-500 border border-blue-500 rounded transition-colors md:text-base hover:border-blue-600 hover:text-blue-600'
           >
             Filters
           </button>
@@ -65,7 +65,7 @@ export default function Filters({ categories: { main, list }, query }) {
             onClick={close}
             className='fixed inset-0 z-10 hidden w-screen h-screen bg-gray-300 bg-opacity-75 md:flex bg-blur-3'
           ></div>
-          <div className='fixed inset-0 z-10 flex flex-col bg-white bg-opacity-75 rounded-lg md:inset-36 lg:inset-y-32 lg:inset-x-56 xl:inset-x-80 bg-blur-5'>
+          <div className='fixed inset-0 z-10 flex flex-col bg-white rounded-lg bg-opacity-75 md:inset-36 lg:inset-y-32 lg:inset-x-56 xl:inset-x-80 bg-blur-5'>
             {/* HEADER */}
             <div className='flex items-center justify-between h-14'>
               <button
@@ -96,7 +96,7 @@ export default function Filters({ categories: { main, list }, query }) {
                     <div className='text-lg font-medium'>{item.name}</div>
                     <div
                       onClick={() => addAll(item.children.nodes)}
-                      className='text-sm text-gray-500 transition-colors cursor-pointer hover:text-gray-900'
+                      className='text-sm text-gray-500 cursor-pointer transition-colors hover:text-gray-900'
                     >
                       Select all
                     </div>
@@ -127,7 +127,7 @@ export default function Filters({ categories: { main, list }, query }) {
             <div className='flex items-center px-4 py-4 pt-3 border-t border-gray-300 lg:justify-end'>
               <button
                 onClick={update}
-                className='w-full py-2 text-sm text-white transition-colors bg-blue-500 rounded lg:w-40 hover:bg-blue-600'
+                className='w-full py-2 text-sm text-white bg-blue-500 rounded transition-colors lg:w-40 hover:bg-blue-600'
               >
                 Update results
               </button>

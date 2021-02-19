@@ -1,6 +1,6 @@
-import Image from "next/image"
-import useLoader from "../../hooks/useLoader"
-import Newsletter from "../../common/Newsletter"
+// import Image from 'next/image'
+import Image from '../../common/Image'
+import Newsletter from '../../common/Newsletter'
 
 export default function HeroHome({ data }) {
   const {
@@ -10,19 +10,12 @@ export default function HeroHome({ data }) {
       node: { sourceUrl },
     },
   } = data
-  const loader = useLoader()
 
   return (
     <>
       <div className='relative hidden md:block'>
         <div className='w-screen h-176 lg:min-h-176 lg:h-screen'>
-          <Image
-            loader={loader}
-            src={sourceUrl}
-            layout={"fill"}
-            className='object-cover'
-            alt='..'
-          />
+          <Image src={sourceUrl} layout={'fill'} className='object-cover' alt='..' />
         </div>
 
         {/* GRADIENTS */}

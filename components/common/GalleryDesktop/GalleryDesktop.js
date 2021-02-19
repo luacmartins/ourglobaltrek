@@ -51,7 +51,7 @@ export default function GalleryDesktop({ images }) {
             onClick={slideLeft}
           >
             <svg
-              className='transition-colors transform rotate-180 fill-current h-14'
+              className='fill-current transition-colors transform rotate-180 h-14'
               xmlns='http://www.w3.org/2000/svg'
               viewBox='0 0 32 32'
               aria-hidden='true'
@@ -67,7 +67,7 @@ export default function GalleryDesktop({ images }) {
             onClick={slideRight}
           >
             <svg
-              className='transition-colors fill-current h-14'
+              className='fill-current transition-colors h-14'
               xmlns='http://www.w3.org/2000/svg'
               viewBox='0 0 32 32'
               aria-hidden='true'

@@ -1,5 +1,5 @@
-import fetcher, { swrFetcher } from "./fetcher"
-import { useSWRInfinite } from "swr"
+import fetcher, { swrFetcher } from './fetcher'
+import { useSWRInfinite } from 'swr'
 import {
   menu,
   page,
@@ -13,7 +13,7 @@ import {
   photoBySlug,
   allCategories,
   allPhotoCategories,
-} from "../queries"
+} from '../queries'
 
 const postPageSize = process.env.NEXT_PUBLIC_POST_PAGE_SIZE
 const photoPageSize = process.env.NEXT_PUBLIC_PHOTO_PAGE_SIZE
@@ -24,29 +24,29 @@ export async function getMenu() {
 }
 
 export async function getPageBySlug(slug) {
-  const data = await fetcher(page, { variables: { id: slug, idType: "URI" } })
+  const data = await fetcher(page, { variables: { id: slug, idType: 'URI' } })
   return data?.page
 }
 
 export async function getAllContentPaths(type) {
-  const query = type === "photos" ? allPhotoPaths : allPostPaths
+  const query = type === 'photos' ? allPhotoPaths : allPostPaths
   const data = await fetcher(query)
   return data?.[type]?.nodes?.map(slug => ({ params: slug }))
 }
 
-export async function getAllContent(type) {
-  const query = type === "photos" ? allPhotos : allPosts
-  const first = type === "photos" ? photoPageSize * 2 : postPageSize * 2
+export async function getAllContent(type, num) {
+  const query = type === 'photos' ? allPhotos : allPosts
+  const first = num ? num : type === 'photos' ? photoPageSize * 2 : postPageSize * 2
 
   const data = await fetcher(query, { variables: { first } })
   return data?.[type]
 }
 
 export async function getContentBySlug(slug, type) {
-  const query = type === "photo" ? photoBySlug : postBySlug
+  const query = type === 'photo' ? photoBySlug : postBySlug
 
   const data = await fetcher(query, {
-    variables: { id: slug, idType: "SLUG" },
+    variables: { id: slug, idType: 'SLUG' },
   })
   return data?.[type]
 }
@@ -90,17 +90,17 @@ export function getContentWithFilters(type, query, initialContent) {
   // If initial data is not set to undefined, swr will use it as initial data for each new set of requests.
   const initialData =
     initialContent && query.length === 0 ? [{ [type]: { ...initialContent } }] : undefined
-  const pageSize = type === "posts" ? postPageSize : photoPageSize
+  const pageSize = type === 'posts' ? postPageSize : photoPageSize
 
   const getKey = (pageIndex, previousPageData) => {
     if (pageIndex === 0) {
-      const variables = { first: 2 * pageSize, before: "", query }
-      return type === "posts" ? postByCategories(variables) : photoByCategories(variables)
+      const variables = { first: 2 * pageSize, before: '', query }
+      return type === 'posts' ? postByCategories(variables) : photoByCategories(variables)
     }
 
     const before = previousPageData?.[type]?.pageInfo?.endCursor
     const variables = { first: postPageSize, before, query }
-    return type === "posts" ? postByCategories(variables) : photoByCategories(variables)
+    return type === 'posts' ? postByCategories(variables) : photoByCategories(variables)
   }
 
   const { data, error, size, setSize } = useSWRInfinite(getKey, swrFetcher, {
@@ -119,7 +119,7 @@ export function getContentWithFilters(type, query, initialContent) {
     !data[data?.length - 1]?.[type]?.pageInfo?.hasNextPage &&
     displayData.length === dataLength
 
-  const isLoading = (!data && !error) || (size > 0 && data && typeof data[size - 1] === "undefined")
+  const isLoading = (!data && !error) || (size > 0 && data && typeof data[size - 1] === 'undefined')
 
   return {
     data: displayData,

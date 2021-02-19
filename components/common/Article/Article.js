@@ -1,4 +1,4 @@
-import useOptimizedImage from "../../hooks/useOptimizedImage"
+import useOptimizedImage from '../../hooks/useOptimizedImage'
 
 export default function Article({ data }) {
   const post = useOptimizedImage(data)

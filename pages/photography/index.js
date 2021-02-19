@@ -18,9 +18,9 @@ export default function Photography({ links, page, categories, initialData }) {
 
   const [query, setQuery] = useState([])
   const { data, isLoading, error, isReachingEnd, loadMore } = getContentWithFilters(
+    "photos",
     query,
-    initialData,
-    "photos"
+    initialData
   )
 
   return (

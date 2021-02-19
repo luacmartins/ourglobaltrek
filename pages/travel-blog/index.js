@@ -16,9 +16,9 @@ export default function TravelBlog({ links, page, categories, initialData }) {
   const { title, seo } = page
   const [query, setQuery] = useState([])
   const { data, isLoading, error, isReachingEnd, loadMore } = getContentWithFilters(
+    "posts",
     query,
-    initialData,
-    "posts"
+    initialData
   )
 
   return (

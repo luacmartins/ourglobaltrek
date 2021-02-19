@@ -13,7 +13,6 @@ import {
   photoBySlug,
   allCategories,
   allPhotoCategories,
-  search,
 } from "../queries"
 
 const postPageSize = process.env.NEXT_PUBLIC_POST_PAGE_SIZE
@@ -86,10 +85,11 @@ export async function getPhotoCategories() {
   return result
 }
 
-export function getContentWithFilters(query, initialContent, type) {
+export function getContentWithFilters(type, query, initialContent) {
   // Set initial cached data only for default query, ommit it for other queries to fetch data and cache it.
   // If initial data is not set to undefined, swr will use it as initial data for each new set of requests.
-  const initialData = query.length === 0 ? [{ [type]: { ...initialContent } }] : undefined
+  const initialData =
+    initialContent && query.length === 0 ? [{ [type]: { ...initialContent } }] : undefined
   const pageSize = type === "posts" ? postPageSize : photoPageSize
 
   const getKey = (pageIndex, previousPageData) => {
@@ -125,30 +125,6 @@ export function getContentWithFilters(query, initialContent, type) {
     data: displayData,
     isLoading,
     isReachingEnd,
-    loadMore: () => setSize(size + 1),
-    error,
-  }
-}
-
-export function getSearch(query) {
-  const getKey = (pageIndex, previousPageData) => {
-    // first page, we don't have `previousPageData`
-    if (pageIndex === 0) return search({ first: 12, before: "", query })
-
-    // get next page cursor from previous page data and return new variables
-    const before = previousPageData?.posts?.pageInfo?.endCursor
-    return search({ first: 12, before, query })
-  }
-
-  const { data, error, size, setSize } = useSWRInfinite(getKey, swrFetcher)
-
-  return {
-    data:
-      data && data.length > 0
-        ? [].concat(...data.map(item => item.posts.nodes))
-        : data?.posts?.nodes,
-    isLoading: (!data && !error) || (size > 0 && data && typeof data[size - 1] === "undefined"),
-    isReachingEnd: data && !data[data?.length - 1]?.posts?.pageInfo?.hasNextPage,
     loadMore: () => setSize(size + 1),
     error,
   }

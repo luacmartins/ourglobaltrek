@@ -11,7 +11,7 @@ export default function LazyImage({ src, width, height, layout, className, ...pr
       <img
         aria-hidden='true'
         src={loader({ src, width: 20 })}
-        className='box-border absolute inset-0 block w-full h-full transform scale-125'
+        className={`box-border absolute inset-0 block w-full h-full transform scale-125 ${className}`}
         style={{
           filter: 'blur(2rem)',
           opacity: isLoaded ? '0' : '1',

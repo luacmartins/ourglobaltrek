@@ -1,5 +1,5 @@
 export default `query allPhotoCategories {
-  categories(where: {childless: true}, first: 100) {
+  categories(where: {childless: true, excludeTree: "2096"}, first: 100) {
     nodes {
       photos {
         nodes {

@@ -1,8 +1,7 @@
-import Reveal from "react-awesome-reveal"
-import { keyframes } from "@emotion/react"
-import useTiledGrid from "../../hooks/useTiledGrid"
-import CardPhoto from "../CardPhoto"
-import Error from "../../common/Error"
+import { Fade } from 'react-awesome-reveal'
+import useTiledGrid from '../../hooks/useTiledGrid'
+import CardPhoto from '../CardPhoto'
+import Error from '../../common/Error'
 
 export default function CardPhotoList({ data, error }) {
   const { className, height } = useTiledGrid()
@@ -12,31 +11,14 @@ export default function CardPhotoList({ data, error }) {
 
   return (
     <>
-      <div className='justify-center mt-10 mb-12 grid grid-cols-1 md:grid-cols-3 gap-y-6 md:gap-4'>
+      <div className='grid justify-center grid-cols-1 mt-10 mb-12 md:grid-cols-3 gap-y-6 md:gap-4'>
         {data &&
           data.map((post, i) => (
-            <Reveal
-              key={post.slug}
-              keyframes={customAnimation}
-              triggerOnce
-              className={className(i)}
-              delay={(i % 4) * 150}
-            >
+            <Fade key={post.slug} triggerOnce className={className(i)} delay={(i % 4) * 150}>
               <CardPhoto data={post} height={height(i)} />
-            </Reveal>
+            </Fade>
           ))}
       </div>
     </>
   )
 }
-
-const customAnimation = keyframes(`
-   from {
-      opacity: 0;
-      transform: scale(1.1);
-   }
-   to {
-      opacity: 1;
-      transform: scale(1);
-   }
-   `)

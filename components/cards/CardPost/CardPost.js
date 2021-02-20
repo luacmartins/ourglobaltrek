@@ -33,7 +33,7 @@ export default function CardPost({ data, featured }) {
               `${
                 featured
                   ? 'w-full md:w-1/2 lg:mr-8 h-48 md:h-64 lg:h-96'
-                  : 'w-32 md:w-full md:h-48 order-2 md:order-none'
+                  : 'w-32 h-24 md:w-full md:h-48 order-2 md:order-none'
               }` + ' relative overflow-hidden block rounded'
             }
           >

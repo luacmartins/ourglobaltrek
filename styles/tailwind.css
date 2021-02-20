@@ -109,4 +109,8 @@
   .blur-3 {
     filter: blur(0.3rem);
   }
+
+  .touch-none {
+    touch-action: none;
+  }
 }

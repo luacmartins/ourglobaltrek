@@ -11,7 +11,7 @@ export default function LazyImage({ src, width, height, layout, className, ...pr
       <img
         aria-hidden='true'
         src={loader({ src, width: 20 })}
-        className={`box-border absolute inset-0 block w-full h-full transform scale-125 transition-opacity blur-3 ${
+        className={`box-border absolute inset-0 block w-full h-full transform scale-125 transition-opacity duration-600 blur-3 ${
           isLoaded ? 'opacity-0' : 'opacity-100'
         }`}
       />
@@ -22,7 +22,9 @@ export default function LazyImage({ src, width, height, layout, className, ...pr
         width={width}
         height={height}
         layout={layout}
-        className={`transition-opacity ${isLoaded ? 'opacity-100' : 'opacity-0'} ${className}`}
+        className={`transition-opacity duration-300 ${
+          isLoaded ? 'opacity-100' : 'opacity-0'
+        } ${className}`}
         {...props}
       />
     </div>

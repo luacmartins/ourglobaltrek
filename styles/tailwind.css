@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 .wordpress h2 {
-  @apply mt-6 mb-4 text-2xl font-semibold text-gray-900 md:mt-8 md:text-3xl;
+  @apply mt-6 mb-4 text-2xl font-semibold text-gray-900 md:mt-16 md:text-3xl;
 }
 
 .wordpress h3 {
@@ -11,7 +11,7 @@
 }
 
 .wordpress p {
-  @apply inline mb-6;
+  @apply mb-6;
 }
 
 .wordpress ul {
@@ -39,7 +39,7 @@
 }
 
 .wp-block-media-text {
-  @apply md:flex md:items-center md:h-96;
+  @apply md:flex md:items-center md:h-120;
 }
 
 .wp-block-media-text__content {
@@ -47,7 +47,11 @@
 }
 
 .wp-block-media-text__media img {
-  @apply md:rounded-l-lg md:rounded-r-none md:h-96 md:object-cover;
+  @apply md:rounded-l-lg md:rounded-r-none md:object-cover md:h-120;
+}
+
+.wp-block-media-text__content h2 {
+  @apply md:mt-0;
 }
 
 .has-media-on-the-right .wp-block-media-text__media {
@@ -63,7 +67,7 @@
 }
 
 .wp-block-media-text__media {
-  @apply md:w-1/2 md:h-96;
+  @apply md:w-1/2;
 }
 
 .wp-block-media-text__content {
@@ -100,5 +104,9 @@
   .bg-blur-8 {
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
+  }
+
+  .blur-3 {
+    filter: blur(0.3rem);
   }
 }

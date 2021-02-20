@@ -5,12 +5,8 @@ export default function HeroPage({ image, title, tags }) {
     <>
       <div className='relative top-0 w-screen h-96 md:h-132 lg:h-164'>
         {/* GRADIENTS */}
-        <div className='absolute w-full h-96 md:h-132 lg:h-164 '>
-          <Image
-            src={image}
-            className='object-cover object-right -z-10 h-96 md:h-132 lg:h-164'
-            layout={'fill'}
-          />
+        <div className='absolute w-full h-96 md:h-132 lg:h-164 -z-10'>
+          <Image src={image} className='object-cover object-right' layout={'fill'} />
         </div>
         <div className='absolute inset-0 w-3/5 h-96 md:h-132 lg:h-164 bg-gradient-to-r from-white opacity-80 -z-10'></div>
         <div className='absolute top-0 right-0 w-screen h-32 bg-gradient-to-b from-white -z-10'></div>

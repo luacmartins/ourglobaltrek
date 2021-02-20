@@ -3,13 +3,15 @@ import { useRouter } from 'next/router'
 import useOverlay from '../useOverlay'
 
 export default function useFilter(query, mainCat) {
-  const [isOpen, toggleModal] = useOverlay()
-  const [filter, setFilter] = useState({ main: '', list: [] })
-
-  const router = useRouter()
-
   const showClear =
     query.filter(item => !mainCat.map(item => item.databaseId).includes(item)).length > 0
+
+  const [isOpen, toggleModal] = useOverlay()
+  const [filter, setFilter] = useState(
+    showClear ? { main: '', list: [...query] } : { main: query[0] || '', list: [] }
+  )
+
+  const router = useRouter()
 
   const add = id => {
     setFilter({ main: id, list: [] })

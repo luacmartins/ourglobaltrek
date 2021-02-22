@@ -1,5 +1,5 @@
 export default function useLoader() {
-  const regex = /https?:\/\/www.ourglobaltrek.com\/wp-content\/uploads\/(.*)/
+  const regex = /https?:\/\/server.ourglobaltrek.com\/wp-content\/uploads\/(.*)/
   const domain = process.env.NEXT_PUBLIC_DOMAIN
 
   const loader = ({ src, width, quality }) => {

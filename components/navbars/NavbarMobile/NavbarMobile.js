@@ -123,7 +123,7 @@ export default function NavbarMobile({ links }) {
           </div>
 
           {/* CONTENT */}
-          <div className='flex flex-col items-center justify-between flex-1 pt-32 pb-20'>
+          <div className='flex flex-col items-center justify-between flex-1 pt-20 pb-20'>
             {/* LINKS */}
             <div className='flex flex-col text-3xl font-light text-center text-gray-600'>
               {links.map(link => (

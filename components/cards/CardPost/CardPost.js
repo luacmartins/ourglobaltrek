@@ -1,22 +1,21 @@
 import Link from 'next/link'
 import Image from '../../common/Image'
 import moment from 'moment'
-import useLoader from '../../hooks/useLoader'
 
 export default function CardPost({ data, featured }) {
   const {
     title,
     date,
     featuredImage: {
-      node: { sourceUrl, srcSet },
+      node: { sourceUrl },
     },
     categories,
     slug,
     excerpt,
   } = data
 
-  const tags = [moment(date).format('MMM D, YYYY')]
-  const loader = useLoader()
+  const published = `Published ${moment(date).fromNow()}`
+  const tags = [published]
 
   return (
     <>

@@ -37,32 +37,7 @@ export default function NavbarMobile({ links }) {
         {/* LOGO */}
         <div>
           <Link href='/'>
-            <a>
-              <svg
-                className='h-12 fill-current'
-                viewBox='0 0 65 32'
-                xmlns='http://www.w3.org/2000/svg'
-              >
-                <path fill='none' d='M-1-1h802v602H-1z' />
-                <g>
-                  <path d='M18.797 11.42l-1.583-.662C19.459 4.523 25.29.001 32.171.001s12.696 4.506 14.812 10.757l-1.583.517c-1.858-5.572-7.139-9.417-13.229-9.417s-11.387 3.99-13.374 9.562zM45.206 20.45l1.603.614c-1.928 6.166-7.603 10.849-14.485 10.93A15.635 15.635 0 0117.2 21.97l1.566-.565c2.024 5.384 7.42 9.064 13.507 8.878s11.264-4.206 12.934-9.833v.001z' />
-                  <text
-                    fontWeight='bold'
-                    stroke='null'
-                    transform='matrix(.39744 0 0 .39744 12.076 10.403)'
-                    fontFamily="'Quicksand'"
-                    fontSize='24'
-                    y='21.117'
-                    x='-27.043'
-                    fillOpacity='null'
-                    strokeOpacity='null'
-                    strokeWidth='0'
-                  >
-                    ourglobaltrek
-                  </text>
-                </g>
-              </svg>
-            </a>
+            <a className='text-2xl font-bold'>ourglobaltrek</a>
           </Link>
         </div>
 

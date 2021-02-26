@@ -75,11 +75,11 @@
 }
 
 .wp-block-image {
-  @apply my-6 md:my-10;
+  @apply my-6 md:my-10 md:items-center md:flex md:flex-col;
 }
 
 .wp-block-image img {
-  @apply object-cover w-auto rounded h-80 md:h-128 lg:h-140;
+  @apply object-cover w-auto rounded md:h-128 lg:h-140;
 }
 
 .wp-block-image figcaption {
@@ -87,19 +87,27 @@
 }
 
 .wp-caption {
-  @apply max-w-full;
+  @apply flex flex-col items-center max-w-full;
 }
 
 .wp-caption img {
-  @apply object-cover w-auto rounded h-80 md:h-128 lg:h-140;
+  @apply object-cover w-auto rounded md:h-128 lg:h-140;
 }
 
 .wp-caption-text {
-  @apply mb-4 text-sm font-normal text-gray-500;
+  @apply w-auto mb-4 text-sm font-normal text-gray-500;
 }
 
 .money-saving {
   @apply px-4 py-2 my-4 bg-blue-100 rounded-lg md:py-4 md:px-8;
+}
+
+.country-summary {
+  @apply p-4 text-sm rounded-lg bg-blue-50;
+}
+
+.map {
+  @apply w-full h-64 rounded md:h-96;
 }
 
 @layer utilities {

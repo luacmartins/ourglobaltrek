@@ -1,9 +1,9 @@
-import Head from "../../components/common/Head"
-import Layout from "../../components/layouts/Layout"
-import HeroPage from "../../components/heroes/HeroPage"
-import Article from "../../components/common/Article"
-import moment from "moment"
-import { getMenu, getAllContentPaths, getContentBySlug } from "../../api/useAPI"
+import Head from '../../components/common/Head'
+import Layout from '../../components/layouts/Layout'
+import HeroPage from '../../components/heroes/HeroPage'
+import Article from '../../components/common/Article'
+import moment from 'moment'
+import { getMenu, getAllContentPaths, getContentBySlug } from '../../api/useAPI'
 
 export default function Post({ links, post }) {
   const {
@@ -19,7 +19,7 @@ export default function Post({ links, post }) {
     },
   } = post
   const published = `Published ${moment(date).fromNow()} by ${author}`
-  const readTime = "3 min read"
+  const readTime = `${Math.ceil(content.split(' ').length / 250)} min read`
   const tags = [readTime, published]
 
   return (
@@ -38,7 +38,7 @@ export default function Post({ links, post }) {
 }
 
 export async function getStaticPaths() {
-  const allPaths = await getAllContentPaths("posts")
+  const allPaths = await getAllContentPaths('posts')
 
   return {
     paths: allPaths,
@@ -48,7 +48,7 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }) {
   const links = await getMenu()
-  const post = await getContentBySlug(params.slug, "post")
+  const post = await getContentBySlug(params.slug, 'post')
   return {
     props: {
       links,

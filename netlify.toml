@@ -1,0 +1,4 @@
+# Netlify otherwise may use an old Node (e.g. 12.x), which breaks modern
+# transitive deps (e.g. tmp@0.2.x requires Node >= 14.14). Match local dev.
+[build.environment]
+  NODE_VERSION = "14.14.0"

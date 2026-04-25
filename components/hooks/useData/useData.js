@@ -1,15 +1,3 @@
-import useSWR from 'swr'
-import { request } from 'graphql-request'
-import { homePosts } from '../../../api/queries'
-
-const uri = process.env.NEXT_PUBLIC_API_URI
-const fetcher = query => request(uri, query)
-
-export const getHomepage = () => {
-   const { data, error } = useSWR(homepage, fetcher)
-   return { data, error }
-}
-
 export default function useData(endpoint) {
    const links = [
       { name: 'Our Story', href: '/our-story' },

@@ -4,14 +4,8 @@ import Layout from '../../components/layouts/Layout'
 import Filters from '../../components/common/Filters'
 import CardPhotoList from '../../components/cards/CardPhotoList'
 import Pagination from '../../components/common/Pagination'
-import {
-  getMenu,
-  getPageBySlug,
-  getAllContent,
-  getCategories,
-  getPhotoCategories,
-  getContentWithFilters,
-} from '../../api/useAPI'
+import { getContentWithFilters } from '../../api/useAPI/client'
+import { getMenu, getPageBySlug, getAllContent, getPhotoCategories } from '../../api/useAPI/server'
 
 export default function Photography({ links, page, categories, initialData }) {
   const router = useRouter()
@@ -44,17 +38,13 @@ export async function getStaticProps() {
   const links = await getMenu()
   const data = await getAllContent('photos')
   const page = await getPageBySlug('photography')
-  const listCategories = await getPhotoCategories()
-  const mainCategories = await getCategories(2096)
+  const categories = await getPhotoCategories()
 
   return {
     props: {
       links,
       page,
-      categories: {
-        main: mainCategories,
-        list: listCategories,
-      },
+      categories,
       initialData: data,
     },
   }

@@ -3,7 +3,7 @@ import Layout from '../../components/layouts/Layout'
 import HeroPage from '../../components/heroes/HeroPage'
 import Article from '../../components/common/Article'
 import moment from 'moment'
-import { getMenu, getAllContentPaths, getContentBySlug } from '../../api/useAPI'
+import { getMenu, getAllContentPaths, getContentBySlug } from '../../api/useAPI/server'
 
 export default function Post({ links, post }) {
   const {

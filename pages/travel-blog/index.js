@@ -4,18 +4,18 @@ import Layout from '../../components/layouts/Layout'
 import Filters from '../../components/common/Filters'
 import CardPostList from '../../components/cards/CardPostList'
 import Pagination from '../../components/common/Pagination'
+import { getContentWithFilters } from '../../api/useAPI/client'
 import {
   getMenu,
   getPageBySlug,
   getAllContent,
   getCategories,
-  getContentWithFilters,
-} from '../../api/useAPI'
+} from '../../api/useAPI/server'
 
 export default function TravelBlog({ links, page, categories, initialData }) {
   const router = useRouter()
   const path = router.query?.q
-  const query = (path && [...path.split(',').map(x => parseInt(x))]) || []
+  const query = (path && [...path.split(',').map(x => parseInt(x, 10))]) || []
 
   const { data, isLoading, error, isReachingEnd, loadMore } = getContentWithFilters(
     'posts',

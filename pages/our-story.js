@@ -1,5 +1,5 @@
 import Head from "../components/common/Head"
-import { getMenu, getPageBySlug } from '../api/useAPI'
+import { getMenu, getPageBySlug } from '../api/useAPI/server'
 import Layout from '../components/layouts/Layout'
 import HeroPage from '../components/heroes/HeroPage'
 import Article from '../components/common/Article'

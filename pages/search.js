@@ -1,12 +1,13 @@
 import { useEffect } from "react"
 import Head from "../components/common/Head"
 import { useRouter } from "next/router"
-import { getMenu, getContentWithFilters } from "../api/useAPI"
+import { getContentWithFilters } from "../api/useAPI/client"
+import { getMenu, getAllContent } from "../api/useAPI/server"
 import Layout from "../components/layouts/Layout"
 import CardPostList from "../components/cards/CardPostList"
 import Pagination from "../components/common/Pagination"
 
-export default function Search({ links }) {
+export default function Search({ links, initialData }) {
   const router = useRouter()
   const query = router.query?.q
 
@@ -14,7 +15,11 @@ export default function Search({ links }) {
     if (!query) router.push("/travel-blog")
   }, [query])
 
-  const { data, isLoading, error, isReachingEnd, loadMore } = getContentWithFilters("posts", query)
+  const { data, isLoading, error, isReachingEnd, loadMore } = getContentWithFilters(
+    "posts",
+    query,
+    initialData
+  )
 
   return (
     <>
@@ -33,10 +38,12 @@ export default function Search({ links }) {
 
 export async function getStaticProps() {
   const links = await getMenu()
+  const initialData = await getAllContent("posts")
 
   return {
     props: {
       links,
+      initialData,
     },
   }
 }

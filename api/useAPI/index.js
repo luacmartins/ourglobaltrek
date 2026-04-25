@@ -1,1 +1,1 @@
-export * from './useAPI'
+export { getContentWithFilters } from './client'

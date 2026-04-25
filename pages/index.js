@@ -1,5 +1,5 @@
 import Head from '../components/common/Head'
-import { getMenu, getAllContent, getPageBySlug } from '../api/useAPI'
+import { getMenu, getAllContent, getPageBySlug } from '../api/useAPI/server'
 import useSize from '../components/hooks/useSize'
 import HeroHomeDesktop from '../components/heroes/HeroHomeDesktop'
 import HeroHomeMobile from '../components/heroes/HeroHomeMobile'

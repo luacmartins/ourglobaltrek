@@ -21,22 +21,20 @@ export default function Filters({ categories: { main, list }, query }) {
       <div className='flex items-center justify-between pb-4 mb-8 font-medium border-b border-gray-300 md:mb-12'>
         {/* MAIN CATEGORY BUTTONS */}
         <div className='space-x-4'>
-          <span
-            onClick={clearAll}
-            className={`${filter.main === '' ? 'text-gray-900' : 'text-gray-500'} cursor-pointer`}
-          >
-            All
-          </span>
-          {main.map(item => (
-            <span
-              key={item.databaseId}
-              onClick={() => add(item.databaseId)}
-              className={`text-gray-500 hover:text-gray-900 transition-colors cursor-pointer 
-                     ${filter.main === item.databaseId ? 'text-gray-900' : ''}`}
-            >
-              {item.name}
-            </span>
-          ))}
+          {main.map(item => {
+            const isAll = item.slug === 'all'
+            const isActive = isAll ? filter.main === '' : filter.main === item.databaseId
+            return (
+              <span
+                key={item.databaseId}
+                onClick={() => (isAll ? clearAll() : add(item.databaseId))}
+                className={`text-gray-500 hover:text-gray-900 transition-colors cursor-pointer 
+                     ${isActive ? 'text-gray-900' : ''}`}
+              >
+                {item.name}
+              </span>
+            )
+          })}
         </div>
 
         {/* FILTERS BUTTON */}
@@ -108,10 +106,9 @@ export default function Filters({ categories: { main, list }, query }) {
                         onClick={() => toggle(country.databaseId)}
                         className={
                           `border text-sm rounded-full px-2 py-1 mr-2 mb-2 cursor-pointer transition-colors ` +
-                          `${
-                            filter.list.includes(country.databaseId)
-                              ? 'text-blue-500 border-blue-500'
-                              : 'border-gray-500 text-gray-500 hover:text-gray-700 hover:border-gray-700 '
+                          `${filter.list.includes(country.databaseId)
+                            ? 'text-blue-500 border-blue-500'
+                            : 'border-gray-500 text-gray-500 hover:text-gray-700 hover:border-gray-700 '
                           }`
                         }
                       >

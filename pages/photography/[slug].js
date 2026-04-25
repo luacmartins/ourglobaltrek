@@ -2,7 +2,7 @@ import Head from "../../components/common/Head"
 import useSize from "../../components/hooks/useSize"
 import GalleryDesktop from "../../components/common/GalleryDesktop"
 import GalleryMobile from "../../components/common/GalleryMobile"
-import { getAllContentPaths, getContentBySlug } from "../../api/useAPI"
+import { getAllContentPaths, getContentBySlug } from "../../api/useAPI/server"
 
 export default function Photo({ photos }) {
   const { title, content } = photos

@@ -1,12 +1,11 @@
 export default function useLoader() {
-  const regex = /https?:\/\/server.ourglobaltrek.com\/wp-content\/uploads\/(.*)/
-  const domain = process.env.NEXT_PUBLIC_DOMAIN
+  const regex =
+    /(?:https?:\/\/[^/]+)?(?:\/travel-blog)?\/wp-content\/uploads\/(.*)/i
 
-  const loader = ({ src, width, quality }) => {
-    const path = src.match(regex)[1]
-    return `https://cdn.statically.io/img/${domain}/f=auto,w=${width}${
-      quality ? `,q=${quality}` : ''
-    }/wp-content/uploads/${path}`
+  const loader = ({ src }) => {
+    const match = String(src || '').match(regex)
+    if (match) return `/images/${match[1]}`
+    return src
   }
 
   return loader

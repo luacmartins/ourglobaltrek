@@ -153,7 +153,7 @@ The best countries for a foodie tour were ones with a deep history of traditiona
 
 <figure>
 
-[![Dan Zai Noodles, Tainan, Taiwan](images/dan-zai-noodles.jpg)](/travel-blog/wp-content/uploads/2015/10/dan-zai-noodles.jpg)
+[![Dan Zai Noodles, Tainan, Taiwan](images/dan-zai-noodles-201510.jpg)](/travel-blog/wp-content/uploads/2015/10/dan-zai-noodles.jpg)
 
 <figcaption>
 

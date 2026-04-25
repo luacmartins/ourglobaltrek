@@ -2,7 +2,7 @@
 author: "julie"
 categories: 
   - "budget"
-coverImage: "backpacks.jpg"
+coverImage: "backpacks-201408.jpg"
 date: 2014-08-28
 id: 662
 slug: "what-to-pack-for-a-year-of-travel"
@@ -151,6 +151,6 @@ HERS
 
 This is how it looks like packed [in our backpacks](/travel-blog/finding-backpacks/ "Finding the “Perfect” Backpacks"):
 
-[![Backpacks](images/backpacks.jpg)](/travel-blog/wp-content/uploads/2014/08/backpacks.jpg)
+[![Backpacks](images/backpacks-201408.jpg)](/travel-blog/wp-content/uploads/2014/08/backpacks.jpg)
 
 So far we're pretty happy with everything we've brought with us! Still getting used to the weight of the backpacks, though.
